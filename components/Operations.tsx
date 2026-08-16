@@ -1,0 +1,67 @@
+import Reveal from './Reveal';
+import { operations } from '@/data/content';
+
+export default function Operations() {
+  return (
+    <section id="operations" className="section bg-surface" aria-labelledby="operations-heading">
+      <div className="container-content">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+          <Reveal className="lg:col-span-7">
+            <span className="rule" />
+            <span className="eyebrow">{operations.eyebrow}</span>
+            <h2 id="operations-heading" className="section-title">
+              {operations.heading}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1} className="lg:col-span-5">
+            <p className="lede">{operations.body}</p>
+          </Reveal>
+        </div>
+
+        {/* Chain of command */}
+        <Reveal className="mt-14">
+          <ol className="flex flex-wrap items-center gap-x-4 gap-y-3">
+            {operations.chain.map((role, i) => (
+              <li key={role} className="flex items-center gap-4">
+                <span className="border border-primary/15 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-primary transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-white">
+                  {role}
+                </span>
+                {i < operations.chain.length - 1 && (
+                  <span aria-hidden="true" className="text-accent">
+                    →
+                  </span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+
+        {/* Training pipeline */}
+        <div className="mt-20">
+          <Reveal className="max-w-2xl">
+            <h3 className="font-heading text-2xl font-extrabold uppercase tracking-display text-primary sm:text-3xl">
+              {operations.trainingHeading}
+            </h3>
+            <p className="mt-4 leading-relaxed text-muted">{operations.trainingIntro}</p>
+          </Reveal>
+
+          <ol className="mt-12 grid gap-8 md:grid-cols-3">
+            {operations.training.map((step, i) => (
+              <Reveal key={step.title} delay={i * 0.1} as="li">
+                <div className="card card-hover group h-full border-t-2 border-accent p-8 lg:p-10">
+                  <span className="font-heading text-5xl font-extrabold tracking-display text-soft transition-colors duration-500 group-hover:text-accent/20">
+                    {step.step}
+                  </span>
+                  <h4 className="mt-4 font-heading text-lg font-extrabold uppercase tracking-display text-primary">
+                    {step.title}
+                  </h4>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{step.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+  );
+}
