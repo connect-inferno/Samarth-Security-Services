@@ -26,7 +26,7 @@ export default function Hero() {
           loop
           muted
           playsInline
-          poster={images.hero}
+          preload="auto"
           className="h-full w-full scale-105 object-cover object-center transition-transform duration-1000"
         >
           <source src={images.heroVideo} type="video/mp4" />
