@@ -25,12 +25,10 @@ export default function BranchMap({ className = '' }: { className?: string }) {
 
       // Bail out if unmounted or the container already has a Leaflet instance
       if (cancelled || !mapRef.current) return;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if ((mapRef.current as any)._leaflet_id) return;
+      if ('_leaflet_id' in mapRef.current) return;
 
       // Fix Leaflet's broken default icon paths when bundled by webpack/Next
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      delete (L.Icon.Default.prototype as any)._getIconUrl;
+      delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
       L.Icon.Default.mergeOptions({
         iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
         iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
