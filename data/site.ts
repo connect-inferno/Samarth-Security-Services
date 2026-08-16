@@ -15,9 +15,10 @@
  * bundle. That is fine — it is not a secret. Never put API keys or tokens in a
  * NEXT_PUBLIC_ variable.
  */
-export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.samarthsecurity.in'
-).replace(/\/$/, ''); // trailing slash breaks canonical/OG URL concatenation
+const _siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? '').trim();
+export const SITE_URL = (_siteUrl && _siteUrl !== '/')
+  ? _siteUrl.replace(/\/$/, '')
+  : 'https://www.samarthsecurity.in'; // fallback — set NEXT_PUBLIC_SITE_URL in Vercel env vars
 
 export const company = {
   name: 'Samarth Security',

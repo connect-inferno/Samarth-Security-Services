@@ -20,7 +20,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(SITE_URL || 'https://www.samarthsecurity.in'),
   title: seo.title,
   description: seo.description,
   keywords: [
