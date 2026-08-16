@@ -20,15 +20,16 @@ export default function Operations() {
 
         {/* Chain of command */}
         <Reveal className="mt-14">
-          <ol className="flex flex-wrap items-center gap-x-4 gap-y-3">
+          <ol className="flex flex-col items-stretch gap-y-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-4 sm:gap-y-3">
             {operations.chain.map((role, i) => (
-              <li key={role} className="flex items-center gap-4">
-                <span className="border border-primary/15 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-primary transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-white">
+              <li key={role} className="flex flex-col items-stretch sm:flex-row sm:items-center gap-2 sm:gap-4">
+                <span className="w-full sm:w-auto border border-primary/15 px-5 py-3 text-xs font-bold uppercase tracking-wider text-primary text-center transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-white">
                   {role}
                 </span>
                 {i < operations.chain.length - 1 && (
-                  <span aria-hidden="true" className="text-accent">
-                    →
+                  <span aria-hidden="true" className="text-accent text-center">
+                    <span className="sm:hidden">↓</span>
+                    <span className="hidden sm:inline">→</span>
                   </span>
                 )}
               </li>

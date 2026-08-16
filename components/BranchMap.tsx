@@ -87,11 +87,11 @@ export default function BranchMap({ className = '' }: { className?: string }) {
           : '';
 
         const embedHtml = b.isHeadOffice
-          ? `<iframe src="${SANGLI_EMBED}" width="260" height="160" style="border:0;border-radius:6px;margin-top:8px;display:block" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>`
+          ? `<iframe src="${SANGLI_EMBED}" width="220" height="140" style="border:0;border-radius:6px;margin-top:8px;display:block;max-width:100%" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>`
           : '';
 
         const popupContent = `
-          <div style="font-family:'Inter',sans-serif;min-width:220px;max-width:280px">
+          <div style="font-family:'Inter',sans-serif;min-width:200px;max-width:260px">
             ${labelHtml}
             <strong style="font-size:14px;color:#0a2540;display:block;margin-bottom:4px">${b.city}</strong>
             <p style="font-size:12px;color:#4b5563;margin:0 0 8px">${address}</p>
@@ -102,9 +102,10 @@ export default function BranchMap({ className = '' }: { className?: string }) {
             ${embedHtml}
           </div>`;
 
-        marker.bindPopup(popupContent, { maxWidth: 300, className: 'branch-popup' });
+        marker.bindPopup(popupContent, { maxWidth: 280, className: 'branch-popup' });
 
-        if (b.isHeadOffice) {
+        // Only auto-open head office popup on desktop — on mobile it covers the whole map
+        if (b.isHeadOffice && typeof window !== 'undefined' && window.innerWidth >= 640) {
           marker.openPopup();
         }
       });
