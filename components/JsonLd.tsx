@@ -23,6 +23,7 @@ export default function JsonLd() {
     description: seo.description,
     telephone: contact.phone,
     email: contact.email,
+    foundingDate: company.foundingDate,
     sameAs,
     areaServed,
     slogan: company.tagline,

@@ -24,6 +24,8 @@ export const company = {
   name: 'Samarth Security',
   legalName: 'Samarth Security (Gadade Group)',
   parent: 'Gadade Group',
+  established: '14 June 2020',
+  foundingDate: '2020-06-14',
   tagline: 'Integrity · Teamwork · Attitude · Performance · Passion',
   shortTagline: 'Trusted Security, Housekeeping & Manpower Services',
 };
@@ -63,6 +65,7 @@ export const navLinks = [
   { label: 'About', href: '/#about' },
   { label: 'Services', href: '/#services' },
   { label: 'Compliance', href: '/#compliance' },
+  { label: 'Reviews', href: '/#testimonials' },
   { label: 'Clients', href: '/clients' },
   { label: 'Branches', href: '/#branches' },
   { label: 'Contact', href: '/#contact' },
