@@ -78,19 +78,38 @@ export default function Hero() {
             {hero.subheadline}
           </p>
 
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
-              href={whatsappQuote}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
+              href="#services"
+              className="btn-primary group flex items-center justify-center gap-2.5 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
             >
-              <WhatsAppIcon className="h-4 w-4" />
-              {hero.primaryCta}
+              <span>{hero.primaryCta}</span>
+              <svg
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-y-1 animate-pulse"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
             </a>
-            <a href={telHref} className="btn-outline-light">
-              <PhoneIcon className="h-4 w-4" />
-              {hero.secondaryCta}
+            <a
+              href="#contact"
+              className="btn-outline-light group flex items-center justify-center gap-2.5 transition-all duration-300 hover:scale-[1.02]"
+            >
+              <span>{hero.secondaryCta}</span>
+              <svg
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
             </a>
           </div>
         </motion.div>

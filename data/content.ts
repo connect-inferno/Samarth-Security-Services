@@ -17,8 +17,8 @@ export const hero = {
   // footer (which is what actually matters for local SEO).
   subheadline:
     'Safeguarding people, property and establishments with disciplined, defence-led protection — across 10+ cities in Maharashtra.',
-  primaryCta: 'Get a Free Quote',
-  secondaryCta: 'Call Now',
+  primaryCta: 'Check Our Services',
+  secondaryCta: 'Contact Us',
   trustBadges: ['PSARA', 'ISO 9001', 'EPF', 'ESIC', 'GST', 'Shop Act'],
   // Compact proof strip under the hero.
   stats: [
