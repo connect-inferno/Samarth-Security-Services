@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Reveal from './Reveal';
 import AnimatedNumber from './AnimatedNumber';
@@ -27,6 +30,30 @@ function ClientMark({ name }: { name: string }) {
 }
 
 export default function ClientsPage() {
+  const [activeTestimonialIdx, setActiveTestimonialIdx] = useState(0);
+  const testimonialScrollRef = useRef<HTMLDivElement>(null);
+
+  const handleTestimonialScroll = () => {
+    if (!testimonialScrollRef.current) return;
+    const { scrollLeft, clientWidth } = testimonialScrollRef.current;
+    if (clientWidth > 0) {
+      const cardWidth = clientWidth * 0.85;
+      const idx = Math.round(scrollLeft / cardWidth);
+      setActiveTestimonialIdx(Math.min(Math.max(idx, 0), testimonials.length - 1));
+    }
+  };
+
+  const scrollToTestimonial = (index: number) => {
+    if (!testimonialScrollRef.current) return;
+    const cards = testimonialScrollRef.current.children;
+    if (cards[index]) {
+      (cards[index] as HTMLElement).scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  };
   return (
     <>
       {/* Page header */}
@@ -49,14 +76,14 @@ export default function ClientsPage() {
 
       {/* Stats */}
       <section aria-label="Client statistics" className="border-b border-primary/10 bg-surface">
-        <div className="container-content grid gap-px bg-primary/10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="container-content grid grid-cols-2 gap-px bg-primary/10 lg:grid-cols-4">
           {clientStats.map((stat, i) => (
             <Reveal key={stat.label} delay={i * 0.07}>
-              <div className="h-full bg-surface px-6 py-10 text-center 2xl:py-14">
-                <span className="block font-heading text-3xl font-extrabold tracking-display text-primary lg:text-4xl 2xl:text-5xl">
+              <div className="h-full bg-surface px-4 py-8 text-center sm:px-6 sm:py-10 2xl:py-14">
+                <span className="block font-heading text-2xl font-extrabold tracking-display text-primary sm:text-3xl lg:text-4xl 2xl:text-5xl">
                   <AnimatedNumber value={stat.value} duration={1.8} />
                 </span>
-                <span className="mt-3 block text-[0.65rem] font-bold uppercase tracking-widest text-muted">
+                <span className="mt-2 block text-[0.62rem] font-bold uppercase tracking-widest text-muted sm:mt-3 sm:text-[0.65rem]">
                   {stat.label}
                 </span>
               </div>
@@ -145,17 +172,34 @@ export default function ClientsPage() {
             </h2>
           </Reveal>
 
-          <div className="mt-16 grid gap-8 lg:grid-cols-3">
+          {/* Mobile Swipe Hint */}
+          <div className="mt-10 flex items-center justify-between text-[0.68rem] font-bold uppercase tracking-widest text-muted/70 sm:hidden">
+            <span>Client Reviews</span>
+            <span className="text-accent">
+              {activeTestimonialIdx + 1} of {testimonials.length} · Swipe →
+            </span>
+          </div>
+
+          {/* Testimonials Grid / Mobile Swipe Carousel */}
+          <div
+            ref={testimonialScrollRef}
+            onScroll={handleTestimonialScroll}
+            className="-mx-5 mt-4 flex gap-5 overflow-x-auto px-5 pb-6 pt-2 snap-x snap-mandatory scrollbar-none sm:mx-0 sm:mt-16 sm:grid sm:gap-8 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3"
+          >
             {testimonials.map((t, i) => (
-              <Reveal key={t.author + i} delay={i * 0.08}>
-                <figure className="card card-hover flex h-full flex-col border-t-2 border-accent p-8 lg:p-10">
-                  <span aria-hidden="true" className="font-heading text-5xl leading-none text-accent/30">
+              <Reveal
+                key={t.author + i}
+                delay={i * 0.08}
+                className="w-[85vw] max-w-[340px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink"
+              >
+                <figure className="card card-hover flex h-full flex-col border-t-4 border-accent bg-white p-7 shadow-soft transition-all duration-500 sm:border-t-2 sm:p-8 lg:p-10">
+                  <span aria-hidden="true" className="font-heading text-4xl leading-none text-accent/30 sm:text-5xl">
                     &ldquo;
                   </span>
-                  <blockquote className="mt-4 flex-1 leading-relaxed text-muted">
+                  <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ink/80 sm:mt-4 sm:text-base sm:text-muted">
                     {t.quote}
                   </blockquote>
-                  <figcaption className="mt-7 border-t border-primary/10 pt-5">
+                  <figcaption className="mt-6 border-t border-primary/10 pt-4 sm:mt-7 sm:pt-5">
                     <span className="block font-heading text-sm font-extrabold uppercase tracking-display text-primary">
                       {t.author}
                     </span>
@@ -163,6 +207,21 @@ export default function ClientsPage() {
                   </figcaption>
                 </figure>
               </Reveal>
+            ))}
+          </div>
+
+          {/* Mobile Pagination Dot Indicators */}
+          <div className="mt-2 flex justify-center gap-1.5 sm:hidden">
+            {testimonials.map((t, i) => (
+              <button
+                key={t.author + i}
+                type="button"
+                onClick={() => scrollToTestimonial(i)}
+                aria-label={`Go to testimonial ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === activeTestimonialIdx ? 'w-6 bg-accent' : 'w-1.5 bg-primary/20 hover:bg-primary/40'
+                }`}
+              />
             ))}
           </div>
         </div>

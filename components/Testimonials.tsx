@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import Reveal from './Reveal';
 import { StarIcon } from './icons';
@@ -5,6 +8,31 @@ import { testimonials } from '@/data/clients';
 import { whatsappQuote } from '@/data/site';
 
 export default function Testimonials() {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, clientWidth } = scrollRef.current;
+    if (clientWidth > 0) {
+      const cardWidth = clientWidth * 0.85;
+      const idx = Math.round(scrollLeft / cardWidth);
+      setActiveIdx(Math.min(Math.max(idx, 0), testimonials.length - 1));
+    }
+  };
+
+  const scrollToTestimonial = (index: number) => {
+    if (!scrollRef.current) return;
+    const cards = scrollRef.current.children;
+    if (cards[index]) {
+      (cards[index] as HTMLElement).scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  };
+
   return (
     <section id="testimonials" className="section bg-soft" aria-labelledby="testimonials-heading">
       <div className="container-content">
@@ -29,11 +57,15 @@ export default function Testimonials() {
         {/* Mobile Swipe Hint */}
         <div className="mt-12 flex items-center justify-between text-[0.68rem] font-bold uppercase tracking-widest text-muted/70 sm:hidden">
           <span>Client Reviews</span>
-          <span className="text-accent">Swipe →</span>
+          <span className="text-accent">{activeIdx + 1} of {testimonials.length} · Swipe →</span>
         </div>
 
         {/* Testimonials Grid / Mobile Swipe Carousel */}
-        <div className="-mx-5 mt-4 flex gap-6 overflow-x-auto px-5 pb-6 pt-2 snap-x snap-mandatory scrollbar-none sm:mx-0 sm:mt-16 sm:grid sm:grid-cols-2 sm:gap-8 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-2 xl:grid-cols-4">
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="-mx-5 mt-4 flex gap-6 overflow-x-auto px-5 pb-6 pt-2 snap-x snap-mandatory scrollbar-none sm:mx-0 sm:mt-16 sm:grid sm:grid-cols-2 sm:gap-8 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-2 xl:grid-cols-4"
+        >
           {testimonials.map((t, i) => (
             <Reveal
               key={t.author + i}
@@ -90,13 +122,16 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Mobile Pagination Dots */}
+        {/* Mobile Pagination Dots (actively tracks scroll position) */}
         <div className="mt-2 flex justify-center gap-1.5 sm:hidden">
           {testimonials.map((t, i) => (
-            <span
+            <button
               key={t.author + i}
+              type="button"
+              onClick={() => scrollToTestimonial(i)}
+              aria-label={`Go to testimonial ${i + 1}`}
               className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === 0 ? 'w-5 bg-accent' : 'w-1.5 bg-primary/20'
+                i === activeIdx ? 'w-6 bg-accent' : 'w-1.5 bg-primary/20 hover:bg-primary/40'
               }`}
             />
           ))}

@@ -19,7 +19,6 @@ export default function BranchMap({
   selectedCity,
   onSelectCity,
 }: BranchMapProps) {
-  // min-height is required for Leaflet to initialise — zero-height containers produce blank maps
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<import('leaflet').Map | null>(null);
   const markersRef = useRef<Map<string, import('leaflet').Marker>>(new Map());
@@ -27,18 +26,15 @@ export default function BranchMap({
   useEffect(() => {
     if (!mapRef.current) return;
 
-    // `cancelled` flag prevents the async callback from touching the DOM after
-    // React StrictMode's first cleanup has already run.
     let cancelled = false;
 
     (async () => {
       const L = (await import('leaflet')).default;
 
-      // Bail out if unmounted or the container already has a Leaflet instance
       if (cancelled || !mapRef.current) return;
       if ('_leaflet_id' in mapRef.current) return;
 
-      // Fix Leaflet's broken default icon paths when bundled by webpack/Next
+      // Fix Leaflet marker icons
       delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
       L.Icon.Default.mergeOptions({
         iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -46,16 +42,15 @@ export default function BranchMap({
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
       });
 
-      // ── Custom SVG icon factories ──────────────────────────────────────────
-      function makeIcon(color: string, label: string, size = 36) {
+      function makeIcon(color: string, label: string, size = 32) {
         const svg = `
           <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size + 10}" viewBox="0 0 ${size} ${size + 10}">
             <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
               <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.3"/>
             </filter>
             <circle cx="${size / 2}" cy="${size / 2}" r="${size / 2 - 2}" fill="${color}" filter="url(#shadow)" stroke="white" stroke-width="2.5"/>
-            <text x="${size / 2}" y="${size / 2 + 5}" text-anchor="middle" fill="white" font-size="${size * 0.32}" font-family="Arial, sans-serif" font-weight="bold">${label}</text>
-            <polygon points="${size / 2},${size + 8} ${size / 2 - 6},${size - 4} ${size / 2 + 6},${size - 4}" fill="${color}"/>
+            <text x="${size / 2}" y="${size / 2 + 4}" text-anchor="middle" fill="white" font-size="${size * 0.32}" font-family="Arial, sans-serif" font-weight="bold">${label}</text>
+            <polygon points="${size / 2},${size + 8} ${size / 2 - 5},${size - 3} ${size / 2 + 5},${size - 3}" fill="${color}"/>
           </svg>`;
         return L.divIcon({
           html: svg,
@@ -66,27 +61,35 @@ export default function BranchMap({
         });
       }
 
-      const headIcon = makeIcon('#c5221f', 'HQ', 42);
-      const branchIcon = makeIcon('#0a2540', 'B', 32);
+      const headIcon = makeIcon('#c5221f', 'HQ', 38);
+      const branchIcon = makeIcon('#0a2540', 'B', 30);
 
-      // ── Initialise Map ─────────────────────────────────────────────────────
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+
+      // Initialise Map
       const map = L.map(mapRef.current, {
-        center: [18.5, 75.8],
-        zoom: 7,
+        center: [18.2, 74.8],
+        zoom: isMobile ? 6 : 7,
+        minZoom: 5,
+        maxZoom: 14,
         scrollWheelZoom: false,
-        zoomControl: true,
+        zoomControl: !isMobile,
+        dragging: !isMobile,
+        touchZoom: false,
+        doubleClickZoom: false,
       });
 
       mapInstanceRef.current = map;
 
-      // OpenStreetMap tiles (free, no API key)
+      // Fast, reliable OpenStreetMap tile provider
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 19,
+        keepBuffer: 4,
       }).addTo(map);
 
-      // ── Place markers ──────────────────────────────────────────────────────
+      // Place markers
       branches.forEach((b) => {
         const icon = b.isHeadOffice ? headIcon : branchIcon;
         const marker = L.marker([b.coords.lat, b.coords.lng], { icon }).addTo(map);
@@ -114,29 +117,40 @@ export default function BranchMap({
             ${embedHtml}
           </div>`;
 
-        marker.bindPopup(popupContent, { maxWidth: 280, className: 'branch-popup' });
+        if (!isMobile) {
+          marker.bindPopup(popupContent, { maxWidth: 280, className: 'branch-popup' });
+          if (b.isHeadOffice) {
+            marker.openPopup();
+          }
+        }
 
-        // Marker click listener
         marker.on('click', () => {
           if (onSelectCity) {
             onSelectCity(b.city);
           }
         });
-
-        // Only auto-open head office popup on desktop — on mobile it covers the whole map
-        if (b.isHeadOffice && typeof window !== 'undefined' && window.innerWidth >= 640) {
-          marker.openPopup();
-        }
       });
 
-      // Fit map to show all markers
+      // Fit bounds to Maharashtra markers
       const allLatLngs = branches.map(
         (b) => [b.coords.lat, b.coords.lng] as [number, number]
       );
-      map.fitBounds(allLatLngs, { padding: [40, 40] });
+      map.fitBounds(allLatLngs, {
+        padding: isMobile ? [20, 20] : [45, 45],
+        maxZoom: 8,
+      });
 
-      // Force tile repaint in case the container wasn't fully sized on first mount
-      setTimeout(() => map.invalidateSize(), 100);
+      // Force size invalidation on render and window resize
+      const forceRefresh = () => {
+        if (mapInstanceRef.current) {
+          mapInstanceRef.current.invalidateSize();
+        }
+      };
+
+      setTimeout(forceRefresh, 100);
+      setTimeout(forceRefresh, 400);
+
+      window.addEventListener('resize', forceRefresh);
     })();
 
     return () => {
@@ -159,7 +173,6 @@ export default function BranchMap({
       mapInstanceRef.current.panTo([targetBranch.coords.lat, targetBranch.coords.lng], {
         animate: true,
       });
-      // On desktop open popup, on mobile let the bottom card show info
       if (typeof window !== 'undefined' && window.innerWidth >= 640) {
         marker.openPopup();
       }
@@ -169,7 +182,8 @@ export default function BranchMap({
   return (
     <div
       ref={mapRef}
-      className={`h-full w-full rounded-lg ${className}`}
+      className={`h-full w-full overflow-hidden ${className}`}
+      style={{ width: '100%', height: '100%', minHeight: '260px' }}
       aria-label="Interactive map showing Samarth Security branch locations across Maharashtra"
     />
   );

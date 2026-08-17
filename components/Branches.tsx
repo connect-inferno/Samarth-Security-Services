@@ -13,7 +13,7 @@ export default function Branches() {
   const selectedBranch = branches.find((b) => b.city === selectedCity) || branches[0];
 
   return (
-    <section id="branches" className="section bg-surface" aria-labelledby="branches-heading">
+    <section id="branches" className="section overflow-hidden bg-surface" aria-labelledby="branches-heading">
       <div className="container-content">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <Reveal className="lg:col-span-7">
@@ -28,21 +28,21 @@ export default function Branches() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-10 lg:grid-cols-5 lg:gap-12">
+        <div className="mt-12 grid w-full max-w-full gap-8 sm:mt-16 sm:gap-10 lg:grid-cols-5 lg:gap-12">
           {/* Maharashtra map graphic */}
-          <Reveal className="lg:col-span-2">
+          <Reveal className="w-full max-w-full overflow-hidden lg:col-span-2">
             <MaharashtraMap
               selectedCity={selectedCity}
               onSelectCity={setSelectedCity}
             />
 
             {/* Mobile Location Quick-Switcher Pills */}
-            <div className="mt-4 sm:hidden">
+            <div className="mt-4 w-full max-w-full overflow-hidden sm:hidden">
               <div className="mb-2 flex items-center justify-between text-[0.68rem] font-bold uppercase tracking-widest text-muted/70">
                 <span>Select Branch</span>
-                <span className="text-accent">Tap marker or pill</span>
+                <span className="text-accent">Tap to view</span>
               </div>
-              <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-2 scrollbar-none">
+              <div className="flex w-full max-w-full gap-2 overflow-x-auto pb-2 scrollbar-none snap-x snap-proximity [-webkit-overflow-scrolling:touch]">
                 {branches.map((b) => {
                   const isSelected = b.city === selectedCity;
                   return (
@@ -50,10 +50,10 @@ export default function Branches() {
                       key={b.city}
                       type="button"
                       onClick={() => setSelectedCity(b.city)}
-                      className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                      className={`shrink-0 snap-start rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
                         isSelected
-                          ? 'bg-accent text-white shadow-md'
-                          : 'border border-primary/20 bg-white text-primary hover:bg-soft'
+                          ? 'bg-accent text-white shadow-md scale-105 ring-2 ring-accent/20'
+                          : 'border border-primary/15 bg-white text-primary/80 hover:bg-soft'
                       }`}
                     >
                       {b.city} {b.isHeadOffice ? '★' : ''}
@@ -63,35 +63,35 @@ export default function Branches() {
               </div>
             </div>
 
-            {/* Mobile: Single Focused Branch Info Card (No long scroll of all 8 branches!) */}
-            <div className="mt-2 block sm:hidden">
-              <div className="rounded-2xl border-2 border-accent/30 bg-white p-5 shadow-soft">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <MapPinIcon className="h-5 w-5 shrink-0 text-accent" />
-                    <div>
-                      <h3 className="font-heading text-base font-extrabold uppercase tracking-display text-primary">
+            {/* Mobile: Single Focused Branch Info Card */}
+            <div className="mt-2 block w-full max-w-full overflow-hidden sm:hidden">
+              <div className="w-full max-w-full overflow-hidden rounded-2xl border-2 border-accent/30 bg-white p-4 shadow-soft">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex min-w-0 items-center gap-2">
+                    <MapPinIcon className="h-4 w-4 shrink-0 text-accent" />
+                    <div className="min-w-0">
+                      <h3 className="truncate font-heading text-base font-extrabold uppercase tracking-display text-primary">
                         {selectedBranch.city}
                       </h3>
                       {selectedBranch.label && (
-                        <span className="mt-1 inline-block rounded bg-secondary px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-white">
+                        <span className="mt-0.5 inline-block rounded bg-secondary px-2 py-0.5 text-[0.58rem] font-bold uppercase tracking-wider text-white">
                           {selectedBranch.label}
                         </span>
                       )}
                     </div>
                   </div>
                   {selectedBranch.isHeadOffice && (
-                    <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider text-accent">
+                    <span className="shrink-0 rounded-full bg-accent/10 px-2.5 py-0.5 text-[0.62rem] font-bold uppercase tracking-wider text-accent">
                       Head Office
                     </span>
                   )}
                 </div>
 
-                <address className="mt-3.5 text-xs not-italic leading-relaxed text-muted">
+                <address className="mt-3 text-xs not-italic leading-relaxed text-muted">
                   {fullAddress(selectedBranch)}
                 </address>
 
-                <div className="mt-4 flex items-center gap-2.5 border-t border-primary/10 pt-3">
+                <div className="mt-4 flex w-full items-center gap-2 border-t border-primary/10 pt-3">
                   <a
                     href={mapsHref(selectedBranch)}
                     target="_blank"
@@ -103,7 +103,7 @@ export default function Branches() {
                   </a>
                   <a
                     href={`tel:${contact.phone}`}
-                    className="btn-outline px-3.5 py-2 text-xs"
+                    className="btn-outline shrink-0 px-3 py-2 text-xs"
                     aria-label="Call branch"
                   >
                     <PhoneIcon className="h-3.5 w-3.5" />
