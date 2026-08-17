@@ -124,4 +124,13 @@ body {
   .link-underline:hover::after {
     @apply w-full;
   }
+
+  /* Hide scrollbar for Chrome, Safari, Firefox and Edge */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }
