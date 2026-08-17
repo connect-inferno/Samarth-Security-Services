@@ -23,11 +23,11 @@ export default function Operations() {
           <ol className="flex flex-col items-stretch gap-y-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-4 sm:gap-y-3">
             {operations.chain.map((role, i) => (
               <li key={role} className="flex flex-col items-stretch sm:flex-row sm:items-center gap-2 sm:gap-4">
-                <span className="w-full sm:w-auto border border-primary/15 px-5 py-3 text-xs font-bold uppercase tracking-wider text-primary text-center transition-colors duration-300 hover:border-primary hover:bg-primary hover:text-white">
+                <span className="w-full sm:w-auto rounded border border-primary/20 bg-white px-5 py-3 text-xs font-extrabold uppercase tracking-wider text-primary text-center shadow-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-white hover:shadow-md">
                   {role}
                 </span>
                 {i < operations.chain.length - 1 && (
-                  <span aria-hidden="true" className="text-accent text-center">
+                  <span aria-hidden="true" className="text-accent text-center font-bold text-base">
                     <span className="sm:hidden">↓</span>
                     <span className="hidden sm:inline">→</span>
                   </span>
@@ -49,11 +49,16 @@ export default function Operations() {
           <ol className="mt-12 grid gap-8 md:grid-cols-3">
             {operations.training.map((step, i) => (
               <Reveal key={step.title} delay={i * 0.1} as="li">
-                <div className="card card-hover group h-full border-t-2 border-accent p-8 lg:p-10">
-                  <span className="font-heading text-5xl font-extrabold tracking-display text-soft transition-colors duration-500 group-hover:text-accent/20">
-                    {step.step}
-                  </span>
-                  <h4 className="mt-4 font-heading text-lg font-extrabold uppercase tracking-display text-primary">
+                <div className="card card-hover group flex h-full flex-col border-t-4 border-accent p-8 lg:p-10">
+                  <div className="flex items-center justify-between">
+                    <span className="font-heading text-4xl font-extrabold tracking-display text-accent">
+                      {step.step}
+                    </span>
+                    <span className="rounded bg-primary/5 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-primary/70 transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
+                      Phase {step.step}
+                    </span>
+                  </div>
+                  <h4 className="mt-6 font-heading text-lg font-extrabold uppercase tracking-display text-primary">
                     {step.title}
                   </h4>
                   <p className="mt-3 text-sm leading-relaxed text-muted">{step.body}</p>
