@@ -16,14 +16,15 @@ html {
   scroll-behavior: smooth;
   /* Offset anchor targets so the sticky header doesn't cover section headings. */
   scroll-padding-top: var(--header-height);
-  overflow-x: hidden;
-  max-width: 100vw;
 }
 
 body {
   @apply bg-surface text-ink font-sans antialiased;
-  overflow-x: hidden;
-  max-width: 100vw;
+  min-height: 100vh;
+}
+
+#main {
+  overflow-x: clip;
   width: 100%;
 }
 

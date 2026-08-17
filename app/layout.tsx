@@ -73,8 +73,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${manrope.variable} overflow-x-hidden`}>
-      <body className="overflow-x-hidden">
+    <html lang="en" className={`${inter.variable} ${manrope.variable}`} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         {/* Keyboard/screen-reader users can jump past the nav. Visible only on focus. */}
         <a
           href="#main"

@@ -39,7 +39,7 @@ export default function Header({ alwaysSolid = false }: { alwaysSolid?: boolean 
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-out ${
+      className={`fixed inset-x-0 top-0 z-[100] transition-all duration-500 ease-out ${
         solid ? 'bg-white/95 shadow-nav backdrop-blur-md' : 'bg-transparent'
       }`}
     >

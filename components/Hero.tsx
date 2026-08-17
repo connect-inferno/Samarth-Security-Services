@@ -20,33 +20,33 @@ export default function Hero() {
       {/*
         Background video with image poster fallback.
       */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 -z-10 overflow-hidden bg-primary-dark">
         <video
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          className="h-full w-full scale-105 object-cover object-center transition-transform duration-1000"
+          className="h-full w-full scale-105 object-cover object-center opacity-80 brightness-95 transition-transform duration-1000 sm:opacity-85 sm:brightness-100"
         >
           <source src={images.heroVideo} type="video/mp4" />
         </video>
       </div>
 
       {/*
-        Scrims.
+        Cinematic Scrims — keeps text crisp while letting video shine brightly
       */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-primary via-primary/55 to-primary/20 sm:hidden"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-primary via-primary/50 to-primary/20 sm:hidden"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 hidden bg-gradient-to-r from-primary/85 via-primary/50 to-transparent sm:block"
+        className="absolute inset-0 -z-10 hidden bg-gradient-to-r from-primary/90 via-primary/45 to-transparent sm:block"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 hidden bg-gradient-to-t from-primary/95 via-primary/30 to-transparent sm:block"
+        className="absolute inset-0 -z-10 hidden bg-gradient-to-t from-primary/80 via-transparent to-transparent sm:block"
       />
 
       {/* flex-1 + items-end pushes the copy toward the base of the hero without
@@ -58,12 +58,12 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-4xl 2xl:max-w-5xl min-[1800px]:max-w-6xl"
         >
-          <p className="mb-7 flex items-center gap-3 text-[0.7rem] font-bold uppercase tracking-widest text-eyebrow-blue sm:text-xs">
+          <p className="mb-7 flex items-center gap-3 text-[0.7rem] font-bold uppercase tracking-widest text-eyebrow-blue drop-shadow-sm sm:text-xs">
             <span className="h-px w-10 bg-accent" />
             {hero.eyebrow}
           </p>
 
-          <h1 id="hero-heading" className="display text-white">
+          <h1 id="hero-heading" className="display text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
             {/* Full keyword phrase for search engines & screen readers */}
             <span className="sr-only">{hero.srTitle}</span>
             <span className="block text-[2.2rem] leading-[0.95] xs:text-[2.6rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5rem] 2xl:text-8xl min-[1800px]:text-[7rem]">
@@ -74,7 +74,7 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="mt-8 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg 2xl:max-w-2xl 2xl:text-xl">
+          <p className="mt-8 max-w-xl text-base leading-relaxed text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] sm:text-lg 2xl:max-w-2xl 2xl:text-xl">
             {hero.subheadline}
           </p>
 
