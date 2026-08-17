@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Reveal from './Reveal';
 import { about } from '@/data/content';
@@ -5,6 +8,31 @@ import { images } from '@/data/images';
 import { ShieldCheckIcon } from './icons';
 
 export default function About() {
+  const [activeCardIdx, setActiveCardIdx] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, clientWidth } = scrollRef.current;
+    if (clientWidth > 0) {
+      const cardWidth = clientWidth * 0.82;
+      const idx = Math.round(scrollLeft / cardWidth);
+      setActiveCardIdx(Math.min(Math.max(idx, 0), about.cards.length - 1));
+    }
+  };
+
+  const scrollToCard = (index: number) => {
+    if (!scrollRef.current) return;
+    const cards = scrollRef.current.children;
+    if (cards[index]) {
+      (cards[index] as HTMLElement).scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  };
+
   return (
     <section id="about" className="section bg-surface" aria-labelledby="about-heading">
       <div className="container-content">
@@ -59,14 +87,14 @@ export default function About() {
                     className="object-cover object-top transition-transform duration-700 ease-out hover:scale-105"
                   />
                   {/* Floating verification badge */}
-                  <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-primary-dark/85 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full bg-primary-dark/85 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-white backdrop-blur-md">
                     <ShieldCheckIcon className="h-3.5 w-3.5 text-accent" />
-                    Defence-Led Discipline
+                    Verified Leadership
                   </div>
                 </div>
 
                 {/* Caption / Designation bar */}
-                <figcaption className="mt-3.5 flex items-center justify-between px-2 pb-1">
+                <figcaption className="mt-3 flex items-center justify-between px-1">
                   <div>
                     <h3 className="font-heading text-sm font-extrabold uppercase tracking-display text-primary">
                       {about.owner?.name ?? 'Leadership'}
@@ -90,12 +118,16 @@ export default function About() {
           <div className="mb-3 flex items-center justify-between text-[0.68rem] font-bold uppercase tracking-widest text-muted/70 sm:hidden">
             <span>Core Pillars</span>
             <span className="flex items-center gap-1 text-accent">
-              Swipe →
+              {activeCardIdx + 1} of {about.cards.length} · Swipe →
             </span>
           </div>
 
           {/* Cards container: Horizontal scroll-snap on mobile, grid on sm+ */}
-          <div className="-mx-5 flex gap-4 overflow-x-auto px-5 pb-4 pt-1 snap-x snap-mandatory scrollbar-none sm:mx-0 sm:grid sm:gap-px sm:overflow-visible sm:bg-primary/10 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3">
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className="-mx-5 flex gap-4 overflow-x-auto px-5 pb-4 pt-1 snap-x snap-mandatory scrollbar-none sm:mx-0 sm:grid sm:gap-px sm:overflow-visible sm:bg-primary/10 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {about.cards.map((card, i) => (
               <Reveal key={card.title} delay={i * 0.1} className="w-[82vw] max-w-[320px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink">
                 <div className="group flex h-full flex-col justify-between rounded-xl border border-primary/10 bg-surface p-7 shadow-soft transition-all duration-500 hover:bg-primary sm:rounded-none sm:border-0 sm:p-8 sm:shadow-none lg:p-12">
@@ -120,13 +152,16 @@ export default function About() {
             ))}
           </div>
 
-          {/* Mobile dot indicators */}
+          {/* Mobile dot indicators (actively tracks scroll position) */}
           <div className="mt-3 flex justify-center gap-1.5 sm:hidden">
             {about.cards.map((card, i) => (
-              <span
+              <button
                 key={card.title}
+                type="button"
+                onClick={() => scrollToCard(i)}
+                aria-label={`Go to slide ${i + 1}`}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === 0 ? 'w-5 bg-accent' : 'w-1.5 bg-primary/20'
+                  i === activeCardIdx ? 'w-6 bg-accent' : 'w-1.5 bg-primary/20 hover:bg-primary/40'
                 }`}
               />
             ))}

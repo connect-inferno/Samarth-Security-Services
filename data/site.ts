@@ -62,8 +62,8 @@ export const mailHref = `mailto:${contact.email}`;
  * /clients as well as from the home page itself.
  */
 export const navLinks = [
-  { label: 'About', href: '/#about' },
   { label: 'Services', href: '/#services' },
+  { label: 'About', href: '/#about' },
   { label: 'Compliance', href: '/#compliance' },
   { label: 'Reviews', href: '/#testimonials' },
   { label: 'Clients', href: '/clients' },
