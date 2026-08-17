@@ -45,7 +45,16 @@ export default function Header({ alwaysSolid = false }: { alwaysSolid?: boolean 
     >
       {/* Header bar: logo | desktop nav | actions + mobile menu toggle */}
       <div className="container-content flex h-[var(--header-height)] items-center justify-between gap-3 sm:gap-6 xl:gap-10">
-        <Link href="/" className="shrink min-w-0 transition-opacity hover:opacity-80">
+        <Link
+          href="/"
+          onClick={(e) => {
+            if (typeof window !== 'undefined' && window.location.pathname === '/') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+          className="shrink min-w-0 transition-opacity hover:opacity-80"
+        >
           <Logo variant={solid ? 'dark' : 'light'} />
           <span className="sr-only">Samarth Security — home</span>
         </Link>

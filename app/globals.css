@@ -16,16 +16,13 @@ html {
   scroll-behavior: smooth;
   /* Offset anchor targets so the sticky header doesn't cover section headings. */
   scroll-padding-top: var(--header-height);
+  overflow-x: clip;
 }
 
 body {
   @apply bg-surface text-ink font-sans antialiased;
   min-height: 100vh;
-}
-
-#main {
   overflow-x: clip;
-  width: 100%;
 }
 
 /* Accessible focus states across the navy/maroon palette. */
