@@ -18,7 +18,7 @@ export default function Hero() {
       aria-labelledby="hero-heading"
     >
       {/*
-        Background video with image poster fallback — pointer-events-none guarantees instant mobile scroll response
+        Background video with image poster fallback — 20% subtle backdrop opacity
       */}
       <div className="pointer-events-none absolute inset-0 -z-10 select-none overflow-hidden bg-primary-dark">
         <video
@@ -27,26 +27,26 @@ export default function Hero() {
           muted
           playsInline
           preload="auto"
-          className="pointer-events-none h-full w-full scale-105 select-none object-cover object-center opacity-80 brightness-95 transition-transform duration-1000 sm:opacity-85 sm:brightness-100"
+          className="pointer-events-none h-full w-full scale-105 select-none object-cover object-center opacity-20 brightness-90 transition-transform duration-1000"
         >
           <source src={images.heroVideo} type="video/mp4" />
         </video>
       </div>
 
       {/*
-        Cinematic Scrims — pointer-events-none so touch events pass cleanly
+        Cinematic Scrims — soft gradients so full video remains vivid while keeping typography legible
       */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 select-none bg-gradient-to-t from-primary via-primary/50 to-primary/20 sm:hidden"
+        className="pointer-events-none absolute inset-0 -z-10 select-none bg-gradient-to-t from-primary/80 via-primary/30 to-transparent sm:hidden"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 hidden select-none bg-gradient-to-r from-primary/90 via-primary/45 to-transparent sm:block"
+        className="pointer-events-none absolute inset-0 -z-10 hidden select-none bg-gradient-to-r from-primary/80 via-primary/30 to-transparent sm:block"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 hidden select-none bg-gradient-to-t from-primary/80 via-transparent to-transparent sm:block"
+        className="pointer-events-none absolute inset-0 -z-10 hidden select-none bg-gradient-to-t from-primary/60 via-transparent to-transparent sm:block"
       />
 
       {/* flex-1 + items-end pushes the copy toward the base of the hero without
