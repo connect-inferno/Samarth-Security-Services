@@ -50,15 +50,17 @@ export default function ClientsPage() {
       {/* Stats */}
       <section aria-label="Client statistics" className="border-b border-primary/10 bg-surface">
         <div className="container-content grid gap-px bg-primary/10 sm:grid-cols-2 lg:grid-cols-4">
-          {clientStats.map((stat) => (
-            <div key={stat.label} className="bg-surface px-6 py-10 text-center 2xl:py-14">
-              <span className="block font-heading text-3xl font-extrabold tracking-display text-primary lg:text-4xl 2xl:text-5xl">
-                <AnimatedNumber value={stat.value} duration={1.8} />
-              </span>
-              <span className="mt-3 block text-[0.65rem] font-bold uppercase tracking-widest text-muted">
-                {stat.label}
-              </span>
-            </div>
+          {clientStats.map((stat, i) => (
+            <Reveal key={stat.label} delay={i * 0.07}>
+              <div className="h-full bg-surface px-6 py-10 text-center 2xl:py-14">
+                <span className="block font-heading text-3xl font-extrabold tracking-display text-primary lg:text-4xl 2xl:text-5xl">
+                  <AnimatedNumber value={stat.value} duration={1.8} />
+                </span>
+                <span className="mt-3 block text-[0.65rem] font-bold uppercase tracking-widest text-muted">
+                  {stat.label}
+                </span>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -147,7 +149,7 @@ export default function ClientsPage() {
             {testimonials.map((t, i) => (
               <Reveal key={t.author + i} delay={i * 0.08}>
                 <figure className="card card-hover flex h-full flex-col border-t-2 border-accent p-8 lg:p-10">
-                  <span aria-hidden="true" className="font-heading text-5xl leading-none text-soft">
+                  <span aria-hidden="true" className="font-heading text-5xl leading-none text-accent/30">
                     &ldquo;
                   </span>
                   <blockquote className="mt-4 flex-1 leading-relaxed text-muted">
@@ -168,25 +170,29 @@ export default function ClientsPage() {
 
       {/* CTA band */}
       <section className="bg-secondary py-16 text-white lg:py-20">
-        <div className="container-content flex flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
-          <h2 className="font-heading text-2xl font-extrabold uppercase leading-tight tracking-display sm:text-3xl lg:max-w-2xl">
-            Ready to secure your premises with a PSARA-licensed team?
-          </h2>
-          <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
-            <a
-              href={whatsappQuote}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn bg-white text-secondary hover:-translate-y-0.5 hover:bg-soft hover:shadow-lift"
-            >
-              <WhatsAppIcon className="h-4 w-4" />
-              Get a Free Quote
-            </a>
-            <a href={telHref} className="btn-outline-light">
-              <PhoneIcon className="h-4 w-4" />
-              Call Now
-            </a>
-          </div>
+        <div className="container-content">
+          <Reveal>
+            <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
+              <h2 className="font-heading text-2xl font-extrabold uppercase leading-tight tracking-display sm:text-3xl lg:max-w-2xl">
+                Ready to secure your premises with a PSARA-licensed team?
+              </h2>
+              <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+                <a
+                  href={whatsappQuote}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn bg-white text-secondary hover:-translate-y-0.5 hover:bg-soft hover:shadow-lift"
+                >
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Get a Free Quote
+                </a>
+                <a href={telHref} className="btn-outline-light">
+                  <PhoneIcon className="h-4 w-4" />
+                  Call Now
+                </a>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
     </>

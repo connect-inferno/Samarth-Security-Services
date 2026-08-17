@@ -4,22 +4,27 @@ import { motion, useReducedMotion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 /**
- * Lightweight scroll-in wrapper (subtle fade + rise). Performance-first:
- * animates once, respects prefers-reduced-motion, and only transforms/opacity.
+ * Lightweight scroll-in fade animation wrapper.
+ * Smoothly fades and slides content into view when scrolling down.
+ * Performance-first: animates once, respects prefers-reduced-motion, hardware-accelerated.
  */
 export default function Reveal({
   children,
   delay = 0,
+  duration = 0.65,
+  y = 24,
   className,
   as = 'div',
 }: {
   children: ReactNode;
   delay?: number;
+  duration?: number;
+  y?: number;
   className?: string;
-  as?: 'div' | 'li' | 'section';
+  as?: 'div' | 'li' | 'section' | 'article' | 'footer' | 'figure' | 'nav' | 'header';
 }) {
   const reduce = useReducedMotion();
-  const MotionTag = motion[as];
+  const MotionTag = motion[as as 'div'];
 
   if (reduce) {
     const Tag = as;
@@ -29,10 +34,14 @@ export default function Reveal({
   return (
     <MotionTag
       className={className}
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, ease: 'easeOut', delay }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{
+        duration,
+        ease: [0.22, 1, 0.36, 1], // fluid cubic bezier ease-out
+        delay,
+      }}
     >
       {children}
     </MotionTag>
