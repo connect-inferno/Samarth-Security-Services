@@ -8,10 +8,21 @@ import { branches, fullAddress, mapsHref } from '@/data/branches';
 const SANGLI_EMBED =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.1313954280495!2d74.58858151073201!3d16.869393483865156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc1191de17f8681%3A0x33d4b8036e1b1a22!2sSAMARTH%20SECURITY%20SERVICE!5e0!3m2!1sen!2sin!4v1786890393273!5m2!1sen!2sin';
 
-export default function BranchMap({ className = '' }: { className?: string }) {
+interface BranchMapProps {
+  className?: string;
+  selectedCity?: string;
+  onSelectCity?: (city: string) => void;
+}
+
+export default function BranchMap({
+  className = '',
+  selectedCity,
+  onSelectCity,
+}: BranchMapProps) {
   // min-height is required for Leaflet to initialise — zero-height containers produce blank maps
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<import('leaflet').Map | null>(null);
+  const markersRef = useRef<Map<string, import('leaflet').Marker>>(new Map());
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -79,6 +90,7 @@ export default function BranchMap({ className = '' }: { className?: string }) {
       branches.forEach((b) => {
         const icon = b.isHeadOffice ? headIcon : branchIcon;
         const marker = L.marker([b.coords.lat, b.coords.lng], { icon }).addTo(map);
+        markersRef.current.set(b.city, marker);
 
         const address = fullAddress(b);
         const directionsUrl = mapsHref(b);
@@ -104,6 +116,13 @@ export default function BranchMap({ className = '' }: { className?: string }) {
 
         marker.bindPopup(popupContent, { maxWidth: 280, className: 'branch-popup' });
 
+        // Marker click listener
+        marker.on('click', () => {
+          if (onSelectCity) {
+            onSelectCity(b.city);
+          }
+        });
+
         // Only auto-open head office popup on desktop — on mobile it covers the whole map
         if (b.isHeadOffice && typeof window !== 'undefined' && window.innerWidth >= 640) {
           marker.openPopup();
@@ -128,6 +147,24 @@ export default function BranchMap({ className = '' }: { className?: string }) {
       }
     };
   }, []);
+
+  // Pan to selected city when it changes
+  useEffect(() => {
+    if (!selectedCity || !mapInstanceRef.current) return;
+    const targetBranch = branches.find((b) => b.city === selectedCity);
+    if (!targetBranch) return;
+
+    const marker = markersRef.current.get(selectedCity);
+    if (marker && mapInstanceRef.current) {
+      mapInstanceRef.current.panTo([targetBranch.coords.lat, targetBranch.coords.lng], {
+        animate: true,
+      });
+      // On desktop open popup, on mobile let the bottom card show info
+      if (typeof window !== 'undefined' && window.innerWidth >= 640) {
+        marker.openPopup();
+      }
+    }
+  }, [selectedCity]);
 
   return (
     <div

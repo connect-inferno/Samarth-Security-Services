@@ -13,7 +13,15 @@ const BranchMap = dynamic(() => import('./BranchMap'), {
   ),
 });
 
-export default function MaharashtraMap({ className = '' }: { className?: string }) {
+export default function MaharashtraMap({
+  className = '',
+  selectedCity,
+  onSelectCity,
+}: {
+  className?: string;
+  selectedCity?: string;
+  onSelectCity?: (city: string) => void;
+}) {
   return (
     <figure
       className={`relative flex flex-col rounded-xl border border-primary/10 bg-white p-4 shadow-soft sm:p-6 ${className}`}
@@ -30,7 +38,11 @@ export default function MaharashtraMap({ className = '' }: { className?: string 
         className="relative w-full overflow-hidden rounded-lg border border-primary/10 bg-soft"
         style={{ minHeight: '320px', height: 'clamp(320px, 60vw, 480px)' }}
       >
-        <BranchMap className="absolute inset-0" />
+        <BranchMap
+          className="absolute inset-0"
+          selectedCity={selectedCity}
+          onSelectCity={onSelectCity}
+        />
       </div>
 
       <p className="mt-2 text-center text-[0.65rem] text-muted">
