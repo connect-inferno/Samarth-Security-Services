@@ -20,7 +20,7 @@ export const images = {
   heroVideo: '/images/hero.mp4',
   heroAlt:
     'Uniformed Samarth Security guard on duty in a corporate building lobby in Maharashtra',
-  owner: '/images/owner.jpg',
+  owner: '/images/owner.png',
   ownerAlt: 'Founder & Managing Director of Samarth Security (Gadade Group)',
   serviceImages: {
     // NOTE: hotlinked Unsplash photos can be deleted by their author at any

@@ -78,7 +78,7 @@ export default function About() {
             <Reveal delay={0.2}>
               <figure className="relative mx-auto max-w-md overflow-hidden rounded-2xl border border-primary/10 bg-white p-3 shadow-soft sm:p-4">
                 {/* Photo container */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-primary/5 sm:aspect-[4/3.5]">
+                <div className="relative aspect-[3/3.8] w-full overflow-hidden rounded-xl bg-primary/5 sm:aspect-[3/3.6]">
                   <Image
                     src={images.owner}
                     alt={images.ownerAlt}
