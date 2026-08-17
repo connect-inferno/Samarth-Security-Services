@@ -43,10 +43,9 @@ export default function Header({ alwaysSolid = false }: { alwaysSolid?: boolean 
         solid ? 'bg-white/95 shadow-nav backdrop-blur-md' : 'bg-transparent'
       }`}
     >
-      {/* Three zones: logo | centred nav | actions. The nav takes the flexible
-          middle column so it never crowds the logo or the CTAs. */}
-      <div className="container-content flex h-[var(--header-height)] items-center gap-6 xl:gap-10">
-        <Link href="/" className="shrink-0 transition-opacity hover:opacity-80">
+      {/* Header bar: logo | desktop nav | actions + mobile menu toggle */}
+      <div className="container-content flex h-[var(--header-height)] items-center justify-between gap-3 sm:gap-6 xl:gap-10">
+        <Link href="/" className="shrink min-w-0 transition-opacity hover:opacity-80">
           <Logo variant={solid ? 'dark' : 'light'} />
           <span className="sr-only">Samarth Security — home</span>
         </Link>
@@ -69,12 +68,12 @@ export default function Header({ alwaysSolid = false }: { alwaysSolid?: boolean 
           </ul>
         </nav>
 
-        {/* Actions — only WhatsApp stays solid so the bar reads calm; Call Now
-            is a lighter outline that adapts to the transparent/solid states. */}
-        <div className="ml-auto flex shrink-0 items-center gap-2.5 xl:ml-0">
+        {/* Actions & Mobile Menu Toggle */}
+        <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+          {/* Call button — visible on tablet+ */}
           <a
             href={telHref}
-            className={`btn hidden px-5 py-3 text-[0.7rem] sm:inline-flex ${
+            className={`btn hidden px-4 py-2.5 text-[0.7rem] sm:inline-flex ${
               solid
                 ? 'border border-primary/25 text-primary hover:border-primary hover:bg-primary hover:text-white'
                 : 'border border-white/35 text-white hover:border-white hover:bg-white hover:text-primary'
@@ -84,58 +83,75 @@ export default function Header({ alwaysSolid = false }: { alwaysSolid?: boolean 
             <PhoneIcon className="h-4 w-4" />
             <span className="hidden xl:inline">Call Now</span>
           </a>
+
+          {/* WhatsApp Action Button */}
           <a
             href={whatsappGreeting}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn bg-[#25D366] px-5 py-3 text-[0.7rem] text-white transition-all hover:-translate-y-0.5 hover:bg-[#1da851] hover:shadow-lift"
+            className="flex h-10 w-10 sm:h-auto sm:w-auto items-center justify-center rounded-lg bg-[#25D366] text-white p-2.5 sm:px-4 sm:py-2.5 text-[0.7rem] font-bold uppercase transition-all hover:bg-[#1da851] shadow-sm"
             aria-label="Chat on WhatsApp"
           >
             <WhatsAppIcon className="h-4 w-4" />
-            <span className="hidden sm:inline">WhatsApp</span>
+            <span className="hidden sm:inline sm:ml-1.5">WhatsApp</span>
           </a>
 
+          {/* Mobile Menu Hamburger Button */}
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className={`-mr-2 ml-1 p-2 transition-colors xl:hidden ${
-              solid ? 'text-primary hover:bg-soft' : 'text-white hover:bg-white/10'
+            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-all duration-200 xl:hidden ${
+              solid
+                ? 'border-primary/15 bg-primary/5 text-primary hover:bg-primary hover:text-white shadow-sm'
+                : 'border-white/25 bg-white/15 text-white hover:bg-white hover:text-primary backdrop-blur-md shadow-sm'
             }`}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Close menu' : 'Open menu'}
           >
-            {open ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
+            {open ? <CloseIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu Dropdown Panel */}
       {open && (
         <div
           id="mobile-menu"
-          className="animate-fade-up border-t border-primary/10 bg-white shadow-soft xl:hidden"
+          className="animate-fade-up border-t border-primary/10 bg-white shadow-lift xl:hidden"
         >
-          <nav aria-label="Mobile" className="container-content py-4">
+          <nav aria-label="Mobile" className="container-content py-5">
             <ul className="flex flex-col divide-y divide-primary/10">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block py-4 text-sm font-bold uppercase tracking-[0.1em] text-primary transition-colors hover:text-accent"
+                    className="flex items-center justify-between py-3.5 text-sm font-bold uppercase tracking-[0.1em] text-primary transition-colors hover:text-accent"
                   >
-                    {link.label}
+                    <span>{link.label}</span>
+                    <span className="text-muted/40">→</span>
                   </Link>
                 </li>
               ))}
             </ul>
 
-            {/* Call Now is hidden in the bar on the narrowest screens, so it lives here. */}
-            <a href={telHref} className="btn-outline mt-5 w-full">
-              <PhoneIcon className="h-4 w-4" />
-              {contact.phoneDisplay}
-            </a>
+            {/* Quick Action Buttons in Mobile Menu */}
+            <div className="mt-5 flex flex-col gap-2.5 border-t border-primary/10 pt-4">
+              <a href={telHref} className="btn-outline w-full justify-center">
+                <PhoneIcon className="h-4 w-4" />
+                {contact.phoneDisplay}
+              </a>
+              <a
+                href={whatsappGreeting}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn w-full justify-center bg-[#25D366] text-white hover:bg-[#1da851]"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                Message on WhatsApp
+              </a>
+            </div>
           </nav>
         </div>
       )}

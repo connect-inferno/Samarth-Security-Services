@@ -16,8 +16,8 @@ export default function Logo({
   const isLight = variant === 'light';
 
   return (
-    <span className="flex items-center gap-3">
-      <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded bg-white p-0.5 shadow-sm ring-1 ring-black/5">
+    <span className="flex items-center gap-2.5 sm:gap-3">
+      <span className="relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center overflow-hidden rounded bg-white p-0.5 shadow-sm ring-1 ring-black/5">
         <Image
           src={src}
           alt={alt}
@@ -26,16 +26,16 @@ export default function Logo({
           className="object-contain object-center"
         />
       </span>
-      <span className="flex flex-col leading-none">
+      <span className="flex flex-col leading-tight min-w-0">
         <span
-          className={`font-heading text-[0.95rem] font-extrabold uppercase tracking-display sm:text-base ${
+          className={`font-heading text-xs xs:text-sm sm:text-base font-extrabold uppercase tracking-display truncate ${
             isLight ? 'text-white' : 'text-primary'
           }`}
         >
           {company.name}
         </span>
         <span
-          className={`mt-1 text-[0.6rem] font-bold uppercase tracking-widest ${
+          className={`text-[0.55rem] sm:text-[0.6rem] font-bold uppercase tracking-widest truncate ${
             isLight ? 'text-white/55' : 'text-muted'
           }`}
         >

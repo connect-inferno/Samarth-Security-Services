@@ -7,6 +7,7 @@ import Operations from '@/components/Operations';
 import Compliance from '@/components/Compliance';
 import Branches from '@/components/Branches';
 import WhyChooseUs from '@/components/WhyChooseUs';
+import Testimonials from '@/components/Testimonials';
 import Social from '@/components/Social';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
@@ -25,6 +26,7 @@ export default function Home() {
         <Compliance />
         <Branches />
         <WhyChooseUs />
+        <Testimonials />
         <Social />
         <Contact />
       </main>
