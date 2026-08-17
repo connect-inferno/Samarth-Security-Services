@@ -20,20 +20,22 @@ export const images = {
   heroVideo: '/images/hero.mp4',
   heroAlt:
     'Uniformed Samarth Security guard on duty in a corporate building lobby in Maharashtra',
+  owner: '/images/owner.jpg',
+  ownerAlt: 'Founder & Managing Director of Samarth Security (Gadade Group)',
   serviceImages: {
     // NOTE: hotlinked Unsplash photos can be deleted by their author at any
     // time — the previous ID here started returning 404. Before launch, download
     // these into /public/images/services/ and reference them locally so the site
     // never depends on a third party staying up. See README → "Swapping in real images".
-    'Security Services': unsplash('photo-1521791136064-7986c2920216', 1000, 80),
-    'Gunman Services': unsplash('photo-1582139329536-e7284fece509', 1000, 80),
-    'Bouncer Services': unsplash('photo-1571019613454-1cb2f99b2d8b', 1000, 80),
-    'Housekeeping Services': unsplash('photo-1581578731548-c64695cc6952', 1000, 80),
-    'Sweeper Services': unsplash('photo-1527515637462-cff94eecc1ac', 1000, 80),
-    'Office Boy Services': unsplash('photo-1507003211169-0a1dd7228f2d', 1000, 80),
-    'Tech & Non-Tech Staff': unsplash('photo-1581092160607-ee22621dd758', 1000, 80),
-    'Labour Services': unsplash('photo-1586528116311-ad8dd3c8310d', 1000, 80),
-    'Support Services': unsplash('photo-1497215728101-856f4ea42174', 1000, 80),
-    'Manpower Services': unsplash('photo-1522071820081-009f0129c71c', 1000, 80),
+    'Security Services': '/images/services/security-services.jpg',
+    'Gunman Services': '/images/services/gunman-services.jpg',
+    'Bouncer Services': '/images/services/bouncer-services.jpg',
+    'Housekeeping Services': '/images/services/housekeeping-services.jpg',
+    'Sweeper Services': '/images/services/sweeper-services.jpg',
+    'Office Boy Services': '/images/services/office-boy-services.jpg',
+    'Tech & Non-Tech Staff': '/images/services/tech-staff.jpg',
+    'Labour Services': '/images/services/labour-services.jpg',
+    'Support Services': '/images/services/office-boy-services.jpg',
+    'Manpower Services': '/images/services/labour-services.jpg',
   } as Record<string, string>,
 };
