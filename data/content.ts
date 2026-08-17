@@ -24,15 +24,22 @@ export const hero = {
   stats: [
     { value: '10+', label: 'Cities Served' },
     { value: '8', label: 'Branch Offices' },
-    { value: '500+', label: 'Guards Deployed' },
+    { value: '300+', label: 'Guards Deployed' },
     { value: '150+', label: 'Clients Served' },
   ],
 };
 
 export const about = {
-  eyebrow: 'About Samarth Security',
+  eyebrow: 'About Samarth Security · Est. 14 June 2020',
   heading: 'A trusted security & facilities partner, backed by defence-grade discipline',
-  body: 'Samarth Security is the security and facilities-management division of the Gadade Group. Led by associate members with rich defence-background experience, we bring military-grade discipline, planning and accountability to every deployment — protecting people, property and establishments for corporate, industrial and housing-society clients across Maharashtra.',
+  body: 'Established on 14 June 2020, Samarth Security is the security and facilities-management division of the Gadade Group. Led by associate members with rich defence-background experience, we bring military-grade discipline, planning and accountability to every deployment — protecting people, property and establishments for corporate, industrial and housing-society clients across Maharashtra.',
+  owner: {
+    name: 'Leadership & Management',
+    designation: 'Founder & Managing Director',
+    badge: 'Gadade Group Leadership',
+    message:
+      'Our priority is unwavering: military-grade discipline, statutory PSARA compliance, and total accountability to protect every client premises across Maharashtra.',
+  },
   cards: [
     {
       title: 'Vision',
@@ -211,11 +218,10 @@ export const branchesSection = {
 export const whyChooseUs = {
   eyebrow: 'Why Choose Us',
   heading: 'Discipline you can trust, service you can rely on',
-  // Mark placeholders clearly — replace with your real, verified numbers.
   stats: [
-    { value: '15+', label: 'Years of Experience' },
+    { value: '2020', label: 'Established (14 June)' },
     { value: '8', label: 'Branches Across Maharashtra' },
-    { value: '500+', label: 'Guards & Staff Deployed' },
+    { value: '300+', label: 'Guards & Staff Deployed' },
     { value: '150+', label: 'Clients Served' },
   ],
   callout:
