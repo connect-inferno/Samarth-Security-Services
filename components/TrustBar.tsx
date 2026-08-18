@@ -20,8 +20,15 @@ export default function TrustBar() {
               {hero.trustBadges.map((badge) => (
                 <span
                   key={badge}
-                  className="font-heading text-xs font-extrabold uppercase tracking-display text-primary/80 transition-colors duration-300 hover:text-accent sm:text-sm lg:text-base"
+                  className={`font-heading text-xs font-extrabold uppercase tracking-display transition-colors duration-300 sm:text-sm lg:text-base ${
+                    badge.includes('BNI')
+                      ? 'text-[#C5131B] hover:text-accent font-black flex items-center gap-1.5'
+                      : 'text-primary/80 hover:text-accent'
+                  }`}
                 >
+                  {badge.includes('BNI') && (
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#E01A22]" />
+                  )}
                   {badge}
                 </span>
               ))}

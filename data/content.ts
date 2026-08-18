@@ -5,6 +5,7 @@
 
 export const hero = {
   eyebrow: 'PSARA Licensed · Gadade Group',
+  bniBadge: 'Proud BNI Member',
   // The visible headline is deliberately short and declarative — two words that
   // land, rather than a list of services. The full keyword-rich phrase still
   // lives in the H1 as a visually-hidden line, so SEO loses nothing.
@@ -19,7 +20,7 @@ export const hero = {
     'Safeguarding people, property and establishments with disciplined, defence-led protection — across 10+ cities in Maharashtra.',
   primaryCta: 'Check Our Services',
   secondaryCta: 'Contact Us',
-  trustBadges: ['PSARA', 'ISO 9001', 'EPF', 'ESIC', 'GST', 'Shop Act'],
+  trustBadges: ['PSARA', 'BNI Member', 'ISO 9001', 'EPF', 'ESIC', 'GST', 'MSME'],
   // Compact proof strip under the hero.
   stats: [
     { value: '10+', label: 'Cities Served' },
@@ -37,6 +38,7 @@ export const about = {
     name: 'Leadership & Management',
     designation: 'Founder & Managing Director',
     badge: 'Gadade Group Leadership',
+    bniAffiliation: 'Active Member — BNI (Business Network International)',
     message:
       'Our priority is unwavering: military-grade discipline, statutory PSARA compliance, and total accountability to protect every client premises across Maharashtra.',
   },
@@ -226,6 +228,15 @@ export const compliance = {
         '/images/msme_certificate_3.jpg',
         '/images/msme_certificate_4.jpg',
       ],
+    },
+    {
+      code: 'BNI',
+      title: 'BNI Member (Business Network International)',
+      description:
+        'Active member of BNI (Business Network International) — representing trusted business leadership, certified ethical standards, and high-calibre service delivery.',
+      imageAlt: 'Samarth Security BNI membership induction and kit presentation ceremony',
+      imageSrc: '/images/bni.png',
+      imagePages: ['/images/bni.png'],
     },
   ],
 };

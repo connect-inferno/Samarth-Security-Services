@@ -22,6 +22,8 @@ export const images = {
     'Uniformed Samarth Security guard on duty in a corporate building lobby in Maharashtra',
   owner: '/images/owner.png',
   ownerAlt: 'Founder & Managing Director of Samarth Security (Gadade Group)',
+  bni: '/images/bni.png',
+  bniAlt: 'Samarth Security founder and managing director receiving official BNI membership',
   serviceImages: {
     // NOTE: hotlinked Unsplash photos can be deleted by their author at any
     // time — the previous ID here started returning 404. Before launch, download

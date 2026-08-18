@@ -9,6 +9,7 @@ import { ShieldCheckIcon } from './icons';
 
 export default function About() {
   const [activeCardIdx, setActiveCardIdx] = useState(0);
+  const [photoTab, setPhotoTab] = useState<'portrait' | 'bni'>('bni');
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = () => {
@@ -59,7 +60,7 @@ export default function About() {
                   <p className="text-sm font-medium leading-relaxed italic text-primary/85">
                     &ldquo;{about.owner.message}&rdquo;
                   </p>
-                  <div className="mt-4 flex items-center gap-3">
+                  <div className="mt-4 flex flex-wrap items-center gap-3">
                     <span className="font-heading text-xs font-extrabold uppercase tracking-wider text-primary">
                       {about.owner.name}
                     </span>
@@ -69,27 +70,97 @@ export default function About() {
                     </span>
                   </div>
                 </div>
+
+                {/* BNI Membership Callout */}
+                <div className="mt-4 flex items-center gap-3.5 rounded-xl border border-red-500/20 bg-gradient-to-r from-red-500/10 via-red-500/5 to-transparent p-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E01A22] font-heading text-xs font-black text-white shadow-sm">
+                    BNI
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-extrabold uppercase tracking-wider text-primary">
+                        Active BNI Member
+                      </span>
+                      <span className="rounded-full bg-[#E01A22]/10 px-2 py-0.5 text-[0.62rem] font-bold text-[#E01A22]">
+                        Verified Network
+                      </span>
+                    </div>
+                    <p className="mt-0.5 text-[0.75rem] leading-relaxed text-muted">
+                      Proud member of Business Network International — representing trusted business leadership, professional ethics, and collaborative service excellence.
+                    </p>
+                  </div>
+                </div>
               </Reveal>
             )}
           </div>
 
-          {/* Right Column: Owner / Founder Image Card */}
+          {/* Right Column: Owner / Founder Image Card with Interactive BNI Switcher */}
           <div className="lg:col-span-5">
             <Reveal delay={0.2}>
               <figure className="relative mx-auto max-w-md overflow-hidden rounded-2xl border border-primary/10 bg-white p-3 shadow-soft sm:p-4">
+                {/* Photo Switcher Tabs */}
+                <div className="mb-3 flex items-center justify-between gap-2 rounded-xl bg-primary/5 p-1">
+                  <button
+                    type="button"
+                    onClick={() => setPhotoTab('bni')}
+                    className={`flex flex-1 items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 ${
+                      photoTab === 'bni'
+                        ? 'bg-primary text-white shadow-sm'
+                        : 'text-primary/70 hover:text-primary hover:bg-white/50'
+                    }`}
+                  >
+                    <span className="inline-block h-2 w-2 rounded-full bg-[#E01A22]" />
+                    BNI Induction
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPhotoTab('portrait')}
+                    className={`flex flex-1 items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 ${
+                      photoTab === 'portrait'
+                        ? 'bg-primary text-white shadow-sm'
+                        : 'text-primary/70 hover:text-primary hover:bg-white/50'
+                    }`}
+                  >
+                    <ShieldCheckIcon className="h-3.5 w-3.5 text-accent" />
+                    Founder
+                  </button>
+                </div>
+
                 {/* Photo container */}
                 <div className="relative aspect-[3/3.8] w-full overflow-hidden rounded-xl bg-primary/5 sm:aspect-[3/3.6]">
-                  <Image
-                    src={images.owner}
-                    alt={images.ownerAlt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                    className="object-cover object-top transition-transform duration-700 ease-out hover:scale-105"
-                  />
+                  {photoTab === 'bni' ? (
+                    <Image
+                      key="bni-photo"
+                      src={images.bni}
+                      alt={images.bniAlt}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                      className="animate-fade-up object-cover object-center transition-transform duration-700 ease-out hover:scale-105"
+                    />
+                  ) : (
+                    <Image
+                      key="owner-photo"
+                      src={images.owner}
+                      alt={images.ownerAlt}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                      className="animate-fade-up object-cover object-top transition-transform duration-700 ease-out hover:scale-105"
+                    />
+                  )}
+
                   {/* Floating verification badge */}
-                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full bg-primary-dark/85 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-white backdrop-blur-md">
-                    <ShieldCheckIcon className="h-3.5 w-3.5 text-accent" />
-                    Verified Leadership
+                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full bg-primary-dark/85 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-white backdrop-blur-md shadow-md">
+                    {photoTab === 'bni' ? (
+                      <>
+                        <span className="inline-block h-2 w-2 rounded-full bg-[#E01A22]" />
+                        BNI Induction Ceremony
+                      </>
+                    ) : (
+                      <>
+                        <ShieldCheckIcon className="h-3.5 w-3.5 text-accent" />
+                        Verified Leadership
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -97,10 +168,10 @@ export default function About() {
                 <figcaption className="mt-3 flex items-center justify-between px-1">
                   <div>
                     <h3 className="font-heading text-sm font-extrabold uppercase tracking-display text-primary">
-                      {about.owner?.name ?? 'Leadership'}
+                      {photoTab === 'bni' ? 'BNI Induction & Kit Ceremony' : (about.owner?.name ?? 'Leadership')}
                     </h3>
                     <p className="text-[0.7rem] font-bold uppercase tracking-wider text-accent">
-                      {about.owner?.designation ?? 'Founder & Managing Director'}
+                      {photoTab === 'bni' ? 'Business Network International' : (about.owner?.designation ?? 'Founder & Managing Director')}
                     </p>
                   </div>
                   <span className="rounded bg-primary/5 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-primary/70">

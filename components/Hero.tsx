@@ -58,10 +58,32 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-4xl 2xl:max-w-5xl min-[1800px]:max-w-6xl"
         >
-          <p className="mb-7 flex items-center gap-3 text-[0.7rem] font-bold uppercase tracking-widest text-eyebrow-blue drop-shadow-sm sm:text-xs">
-            <span className="h-px w-10 bg-accent" />
-            {hero.eyebrow}
-          </p>
+          {/* Top Highlight Badges: BNI Member + PSARA Eyebrow */}
+          <div className="mb-6 flex flex-wrap items-center gap-3">
+            <div className="animate-subtle-pulse relative flex items-center gap-2 overflow-hidden rounded-full border border-red-400/40 bg-[#E01A22] px-3.5 py-1 text-[0.72rem] font-bold uppercase tracking-wider text-white shadow-md transition-all duration-300 hover:scale-[1.02] sm:text-xs">
+              {/* Subtle Periodic Light Shimmer */}
+              <span
+                aria-hidden="true"
+                className="animate-subtle-shimmer pointer-events-none absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/35 to-transparent"
+              />
+
+              {/* Clean Live Status Beacon */}
+              <span className="relative flex h-1.5 w-1.5 shrink-0">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
+              </span>
+
+              <span className="relative z-10 font-heading font-extrabold tracking-wider text-white">
+                Proud BNI Member
+              </span>
+            </div>
+
+            <span className="hidden h-3.5 w-px bg-white/25 sm:inline-block" />
+            <p className="flex items-center gap-2.5 text-[0.7rem] font-bold uppercase tracking-widest text-eyebrow-blue drop-shadow-sm sm:text-xs">
+              <span className="h-px w-6 bg-accent sm:hidden" />
+              {hero.eyebrow}
+            </p>
+          </div>
 
           <h1 id="hero-heading" className="display text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
             {/* Full keyword phrase for search engines & screen readers */}
