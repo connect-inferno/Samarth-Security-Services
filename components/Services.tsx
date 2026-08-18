@@ -66,7 +66,7 @@ export default function Services() {
                   onClick={() => setSelectedCategory(cat.id)}
                   className={`shrink-0 snap-start px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
                     isSelected
-                      ? 'bg-accent text-white shadow-md'
+                      ? 'bg-primary text-white shadow-md'
                       : 'border border-primary/15 bg-white text-primary/80 hover:bg-soft'
                   }`}
                 >
@@ -85,7 +85,7 @@ export default function Services() {
 
             return (
               <Reveal key={item.title} delay={(i % 4) * 0.06}>
-                <article className="card card-hover group flex h-full flex-col overflow-hidden rounded-none border border-primary/10 bg-white shadow-soft transition-all duration-500 hover:border-accent">
+                <article className="card card-hover group flex h-full flex-col overflow-hidden rounded-none border border-primary/10 bg-white shadow-soft transition-all duration-500 hover:border-primary/40">
                   {/* Service photo slot — prominent, uncropped & square */}
                   <div className="relative aspect-[16/10] w-full overflow-hidden rounded-none bg-primary/5">
                     {imageUrl ? (
@@ -97,7 +97,7 @@ export default function Services() {
                         className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                     ) : null}
-                    <span className="absolute left-0 top-0 z-10 flex h-11 w-11 items-center justify-center rounded-none bg-accent text-white shadow-md">
+                    <span className="absolute left-0 top-0 z-10 flex h-11 w-11 items-center justify-center rounded-none bg-primary/95 text-white shadow-md backdrop-blur-md">
                       {Icon ? <Icon className="h-5 w-5" /> : null}
                     </span>
                     <span className="absolute right-0 top-0 z-10 rounded-none bg-primary-dark/85 px-3 py-1 font-mono text-xs font-bold text-white backdrop-blur-md">
@@ -106,7 +106,7 @@ export default function Services() {
                   </div>
 
                   <div className="flex flex-1 flex-col p-6 sm:p-7">
-                    <h3 className="font-heading text-base font-extrabold uppercase tracking-display text-primary transition-colors duration-300 group-hover:text-accent sm:text-lg">
+                    <h3 className="font-heading text-base font-extrabold uppercase tracking-display text-primary transition-colors duration-300 group-hover:text-primary-light sm:text-lg">
                       {item.title}
                     </h3>
                     <p className="mt-3 flex-1 text-xs leading-relaxed text-muted sm:text-sm">
@@ -117,7 +117,7 @@ export default function Services() {
                       href={whatsappForService(item.title)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary mt-6 justify-center rounded-none py-3 text-center text-xs tracking-wider"
+                      className="mt-6 inline-flex items-center justify-center gap-2 border border-primary/20 bg-primary/[0.03] py-3 text-center text-xs font-bold uppercase tracking-wider text-primary transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white"
                     >
                       Enquire on WhatsApp →
                     </a>

@@ -182,6 +182,11 @@ export const compliance = {
       description:
         'Employees’ Provident Fund registered — statutory retirement benefits for every deployed employee.',
       imageAlt: 'Samarth Security EPF registration certificate',
+      imageSrc: '/images/epf_certificate_1.jpg',
+      imagePages: [
+        '/images/epf_certificate_1.jpg',
+        '/images/epf_certificate_2.jpg',
+      ],
     },
     {
       code: 'ESIC',
@@ -189,20 +194,38 @@ export const compliance = {
       description:
         'Employees’ State Insurance registered — medical and insurance cover for our workforce.',
       imageAlt: 'Samarth Security ESIC registration certificate',
+      imageSrc: '/images/esic_certificate_1.jpg',
+      imagePages: [
+        '/images/esic_certificate_1.jpg',
+        '/images/esic_certificate_2.jpg',
+      ],
     },
     {
       code: 'GST',
       title: 'GST Registered',
       description:
-        'Goods & Services Tax registered — transparent, compliant and fully invoiced billing.',
+        'Goods & Services Tax registered (Govt of India & Maharashtra) — transparent, compliant and fully invoiced billing.',
       imageAlt: 'Samarth Security GST registration certificate',
+      imageSrc: '/images/gst_certificate_1.jpg',
+      imagePages: [
+        '/images/gst_certificate_1.jpg',
+        '/images/gst_certificate_2.jpg',
+        '/images/gst_certificate_3.jpg',
+      ],
     },
     {
-      code: 'Shop Act',
-      title: 'Shop Act License',
+      code: 'MSME',
+      title: 'MSME / Udyam Registration',
       description:
-        'Registered under the Maharashtra Shops & Establishments Act for lawful operation.',
-      imageAlt: 'Samarth Security Shop Act license certificate',
+        'Registered under Ministry of Micro, Small & Medium Enterprises (Govt. of India) as an authorized service enterprise.',
+      imageAlt: 'Samarth Security MSME Udyam registration certificate',
+      imageSrc: '/images/msme_certificate_1.jpg',
+      imagePages: [
+        '/images/msme_certificate_1.jpg',
+        '/images/msme_certificate_2.jpg',
+        '/images/msme_certificate_3.jpg',
+        '/images/msme_certificate_4.jpg',
+      ],
     },
   ],
 };

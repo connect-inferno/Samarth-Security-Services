@@ -57,18 +57,27 @@ export const telHref = `tel:${contact.phone}`;
 export const mailHref = `mailto:${contact.email}`;
 
 /**
- * Navigation used by the header and footer.
- * Hrefs are root-relative (`/#about`) so they work from sub-pages like
- * /clients as well as from the home page itself.
+ * Primary navigation used in the header.
+ * Streamlined to core destinations for a clean, modern navbar.
  */
 export const navLinks = [
   { label: 'Services', href: '/#services' },
   { label: 'About', href: '/#about' },
-  { label: 'Compliance', href: '/#compliance' },
-  { label: 'Reviews', href: '/#testimonials' },
   { label: 'Clients', href: '/clients' },
-  { label: 'Branches', href: '/#branches' },
   { label: 'Contact', href: '/#contact' },
+];
+
+/**
+ * Extended navigation used by the footer for comprehensive site exploration.
+ */
+export const footerNavLinks = [
+  { label: 'Services', href: '/#services' },
+  { label: 'About Us', href: '/#about' },
+  { label: 'Compliance & PSARA', href: '/#compliance' },
+  { label: 'Client Reviews', href: '/#testimonials' },
+  { label: 'Our Clients', href: '/clients' },
+  { label: 'Branches', href: '/#branches' },
+  { label: 'Contact Us', href: '/#contact' },
 ];
 
 export const seo = {

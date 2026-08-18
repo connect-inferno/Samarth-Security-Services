@@ -60,13 +60,13 @@ export default function Header({ alwaysSolid = false }: { alwaysSolid?: boolean 
         </Link>
 
         {/* Desktop nav */}
-        <nav aria-label="Primary" className="hidden flex-1 justify-center xl:flex">
-          <ul className="flex items-center gap-7 xl:gap-9 2xl:gap-11">
+        <nav aria-label="Primary" className="hidden flex-1 justify-center lg:flex">
+          <ul className="flex items-center gap-6 lg:gap-8 xl:gap-10">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`link-underline whitespace-nowrap pb-1 text-sm font-medium transition-colors xl:text-[0.95rem] ${
+                  className={`link-underline whitespace-nowrap pb-1 text-sm font-medium transition-colors lg:text-[0.95rem] ${
                     solid ? 'text-muted hover:text-primary' : 'text-white/75 hover:text-white'
                   }`}
                 >
@@ -90,7 +90,7 @@ export default function Header({ alwaysSolid = false }: { alwaysSolid?: boolean 
             aria-label={`Call Now ${contact.phoneDisplay}`}
           >
             <PhoneIcon className="h-4 w-4" />
-            <span className="hidden xl:inline">Call Now</span>
+            <span className="hidden lg:inline">Call Now</span>
           </a>
 
           {/* WhatsApp Action Button */}
@@ -109,7 +109,7 @@ export default function Header({ alwaysSolid = false }: { alwaysSolid?: boolean 
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-all duration-200 xl:hidden ${
+            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-all duration-200 lg:hidden ${
               solid
                 ? 'border-primary/15 bg-primary/5 text-primary hover:bg-primary hover:text-white shadow-sm'
                 : 'border-white/25 bg-white/15 text-white hover:bg-white hover:text-primary backdrop-blur-md shadow-sm'
@@ -127,7 +127,7 @@ export default function Header({ alwaysSolid = false }: { alwaysSolid?: boolean 
       {open && (
         <div
           id="mobile-menu"
-          className="animate-fade-up border-t border-primary/10 bg-white shadow-lift xl:hidden"
+          className="animate-fade-up border-t border-primary/10 bg-white shadow-lift lg:hidden"
         >
           <nav aria-label="Mobile" className="container-content py-5">
             <ul className="flex flex-col divide-y divide-primary/10">

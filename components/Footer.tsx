@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Logo from './Logo';
 import Reveal from './Reveal';
 import { InstagramIcon, WhatsAppIcon, MailIcon, MapPinIcon } from './icons';
-import { navLinks, contact, company, whatsappGreeting, mailHref } from '@/data/site';
+import { footerNavLinks, contact, company, whatsappGreeting, mailHref } from '@/data/site';
 import { legalDocs } from '@/data/legal';
 import { branches, fullAddress, mapsHref } from '@/data/branches';
 
@@ -60,7 +60,7 @@ export default function Footer() {
                 Explore
               </h2>
               <ul className="mt-6 space-y-3">
-                {navLinks.map((link) => (
+                {footerNavLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
@@ -125,7 +125,7 @@ export default function Footer() {
                 ))}
                 <span aria-hidden="true" className="hidden text-white/20 sm:inline">|</span>
                 <span className="uppercase tracking-wider">
-                  PSARA · EPF · ESIC · GST · Shop Act Compliant
+                  PSARA · ISO 9001 · EPF · ESIC · GST · MSME Compliant
                 </span>
               </nav>
             </div>
