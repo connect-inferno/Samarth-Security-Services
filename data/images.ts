@@ -21,9 +21,9 @@ export const images = {
   heroAlt:
     'Uniformed Samarth Security guard on duty in a corporate building lobby in Maharashtra',
   owner: '/images/owner.png',
-  ownerAlt: 'Founder & Managing Director of Samarth Security (Gadade Group)',
+  ownerAlt: 'Akash Shubhangi Birudev Gadade — Founder & Managing Director of Samarth Security (Gadade Group)',
   bni: '/images/bni.png',
-  bniAlt: 'Samarth Security founder and managing director receiving official BNI membership',
+  bniAlt: 'Akash Shubhangi Birudev Gadade receiving official BNI (Business Network International) membership',
   serviceImages: {
     // NOTE: hotlinked Unsplash photos can be deleted by their author at any
     // time — the previous ID here started returning 404. Before launch, download

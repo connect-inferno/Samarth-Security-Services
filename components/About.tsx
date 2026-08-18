@@ -168,10 +168,10 @@ export default function About() {
                 <figcaption className="mt-3 flex items-center justify-between px-1">
                   <div>
                     <h3 className="font-heading text-sm font-extrabold uppercase tracking-display text-primary">
-                      {photoTab === 'bni' ? 'BNI Induction & Kit Ceremony' : (about.owner?.name ?? 'Leadership')}
+                      {about.owner?.name ?? 'Akash Shubhangi Birudev Gadade'}
                     </h3>
                     <p className="text-[0.7rem] font-bold uppercase tracking-wider text-accent">
-                      {photoTab === 'bni' ? 'Business Network International' : (about.owner?.designation ?? 'Founder & Managing Director')}
+                      {photoTab === 'bni' ? 'BNI Member · Induction Ceremony' : (about.owner?.designation ?? 'Founder & Managing Director')}
                     </p>
                   </div>
                   <span className="rounded bg-primary/5 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-primary/70">

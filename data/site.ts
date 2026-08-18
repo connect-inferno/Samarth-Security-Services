@@ -24,6 +24,7 @@ export const company = {
   name: 'Samarth Security',
   legalName: 'Samarth Security (Gadade Group)',
   parent: 'Gadade Group',
+  founder: 'Akash Shubhangi Birudev Gadade',
   established: '14 June 2020',
   foundingDate: '2020-06-14',
   tagline: 'Integrity · Teamwork · Attitude · Performance · Passion',

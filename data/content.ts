@@ -35,7 +35,7 @@ export const about = {
   heading: 'A trusted security & facilities partner, backed by defence-grade discipline',
   body: 'Established on 14 June 2020, Samarth Security is the security and facilities-management division of the Gadade Group. Led by associate members with rich defence-background experience, we bring military-grade discipline, planning and accountability to every deployment — protecting people, property and establishments for corporate, industrial and housing-society clients across Maharashtra.',
   owner: {
-    name: 'Leadership & Management',
+    name: 'Akash Shubhangi Birudev Gadade',
     designation: 'Founder & Managing Director',
     badge: 'Gadade Group Leadership',
     bniAffiliation: 'Active Member — BNI (Business Network International)',

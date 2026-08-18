@@ -24,6 +24,7 @@ export default function JsonLd() {
     telephone: contact.phone,
     email: contact.email,
     foundingDate: company.foundingDate,
+    founder: { '@type': 'Person', name: company.founder },
     sameAs,
     areaServed,
     slogan: company.tagline,
