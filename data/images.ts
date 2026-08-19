@@ -22,6 +22,8 @@ export const images = {
     'Uniformed Samarth Security guard on duty in a corporate building lobby in Maharashtra',
   owner: '/images/owner.png',
   ownerAlt: 'Akash Shubhangi Birudev Gadade — Founder & Managing Director of Samarth Security (Gadade Group)',
+  parents: '/images/parents.png',
+  parentsAlt: 'Birudev Janappa Gadade & Shubhangi Birudev Gadade — Founding Pillars & Inspiration of Gadade Group',
   bni: '/images/bni.png',
   bniAlt: 'Akash Shubhangi Birudev Gadade receiving official BNI (Business Network International) membership',
   serviceImages: {

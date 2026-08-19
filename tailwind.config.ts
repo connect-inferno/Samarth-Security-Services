@@ -52,6 +52,10 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateY(16px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
         'soft-pulse': {
           '0%, 100%': { transform: 'scale(1)', opacity: '0.55' },
           '50%': { transform: 'scale(1.18)', opacity: '0' },
@@ -59,6 +63,7 @@ const config: Config = {
       },
       animation: {
         'fade-up': 'fade-up 0.5s ease-out both',
+        'fade-in': 'fade-in 0.6s ease-out both',
         'soft-pulse': 'soft-pulse 2.8s ease-in-out infinite',
       },
     },

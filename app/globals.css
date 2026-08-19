@@ -136,6 +136,15 @@ body {
   }
 }
 
+@keyframes carousel-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 @keyframes subtle-shimmer {
   0%, 65% {
     transform: translateX(-150%);

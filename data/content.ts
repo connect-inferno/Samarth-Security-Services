@@ -42,6 +42,53 @@ export const about = {
     message:
       'Our priority is unwavering: military-grade discipline, statutory PSARA compliance, and total accountability to protect every client premises across Maharashtra.',
   },
+  parents: {
+    name: 'Birudev Janappa Gadade & Shubhangi Birudev Gadade',
+    father: 'Birudev Janappa Gadade',
+    mother: 'Shubhangi Birudev Gadade',
+    designation: 'Founding Pillars & Mentors',
+    badge: 'Blessings & Inspiration',
+    message:
+      'Rooted in enduring family values, ethical integrity, and unwavering dedication to service — the foundational inspiration behind Gadade Group.',
+  },
+  leadershipSlides: [
+    {
+      id: 'founder',
+      tabLabel: 'Founder',
+      name: 'Akash Shubhangi Birudev Gadade',
+      role: 'Founder & Managing Director',
+      tag: 'Est. 2020 · Gadade Group',
+      badge: 'Verified Leadership',
+      badgeType: 'founder',
+      image: '/images/owner.png',
+      imageAlt: 'Akash Shubhangi Birudev Gadade — Founder & Managing Director of Samarth Security',
+      objectPosition: 'object-top',
+    },
+    {
+      id: 'parents',
+      tabLabel: 'Founding Pillars',
+      name: 'Birudev Janappa Gadade & Shubhangi Birudev Gadade',
+      role: 'Founding Pillars & Mentors',
+      tag: 'Founding Roots · Gadade Group',
+      badge: 'Blessings & Inspiration',
+      badgeType: 'parents',
+      image: '/images/parents.png',
+      imageAlt: 'Birudev Janappa Gadade & Shubhangi Birudev Gadade — Founding Pillars of Gadade Group',
+      objectPosition: 'object-center',
+    },
+    {
+      id: 'bni',
+      tabLabel: 'BNI Member',
+      name: 'Akash Shubhangi Birudev Gadade',
+      role: 'Active BNI Member · Induction Ceremony',
+      tag: 'Verified Network · BNI',
+      badge: 'BNI Induction Ceremony',
+      badgeType: 'bni',
+      image: '/images/bni.png',
+      imageAlt: 'Akash Shubhangi Birudev Gadade receiving official BNI membership',
+      objectPosition: 'object-center',
+    },
+  ],
   cards: [
     {
       title: 'Vision',

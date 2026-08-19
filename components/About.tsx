@@ -1,15 +1,12 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import Image from 'next/image';
 import Reveal from './Reveal';
+import LeadershipCarousel from './LeadershipCarousel';
 import { about } from '@/data/content';
-import { images } from '@/data/images';
-import { ShieldCheckIcon } from './icons';
 
 export default function About() {
   const [activeCardIdx, setActiveCardIdx] = useState(0);
-  const [photoTab, setPhotoTab] = useState<'portrait' | 'bni'>('bni');
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = () => {
@@ -39,7 +36,7 @@ export default function About() {
       <div className="container-content">
         {/* Main About Story & Owner Portrait Grid */}
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
-          {/* Left Column: Heading, Description & Leadership Quote */}
+          {/* Left Column: Heading, Description, Leadership & Founding Pillars */}
           <div className="lg:col-span-7">
             <Reveal>
               <span className="rule" />
@@ -94,91 +91,10 @@ export default function About() {
             )}
           </div>
 
-          {/* Right Column: Owner / Founder Image Card with Interactive BNI Switcher */}
+          {/* Right Column: Automatic Moving Leadership Carousel (Founder -> Parents -> BNI) */}
           <div className="lg:col-span-5">
             <Reveal delay={0.2}>
-              <figure className="relative mx-auto max-w-md overflow-hidden rounded-2xl border border-primary/10 bg-white p-3 shadow-soft sm:p-4">
-                {/* Photo Switcher Tabs */}
-                <div className="mb-3 flex items-center justify-between gap-2 rounded-xl bg-primary/5 p-1">
-                  <button
-                    type="button"
-                    onClick={() => setPhotoTab('bni')}
-                    className={`flex flex-1 items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 ${
-                      photoTab === 'bni'
-                        ? 'bg-primary text-white shadow-sm'
-                        : 'text-primary/70 hover:text-primary hover:bg-white/50'
-                    }`}
-                  >
-                    <span className="inline-block h-2 w-2 rounded-full bg-[#E01A22]" />
-                    BNI Induction
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPhotoTab('portrait')}
-                    className={`flex flex-1 items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 ${
-                      photoTab === 'portrait'
-                        ? 'bg-primary text-white shadow-sm'
-                        : 'text-primary/70 hover:text-primary hover:bg-white/50'
-                    }`}
-                  >
-                    <ShieldCheckIcon className="h-3.5 w-3.5 text-accent" />
-                    Founder
-                  </button>
-                </div>
-
-                {/* Photo container */}
-                <div className="relative aspect-[3/3.8] w-full overflow-hidden rounded-xl bg-primary/5 sm:aspect-[3/3.6]">
-                  {photoTab === 'bni' ? (
-                    <Image
-                      key="bni-photo"
-                      src={images.bni}
-                      alt={images.bniAlt}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                      className="animate-fade-up object-cover object-center transition-transform duration-700 ease-out hover:scale-105"
-                    />
-                  ) : (
-                    <Image
-                      key="owner-photo"
-                      src={images.owner}
-                      alt={images.ownerAlt}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                      className="animate-fade-up object-cover object-top transition-transform duration-700 ease-out hover:scale-105"
-                    />
-                  )}
-
-                  {/* Floating verification badge */}
-                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full bg-primary-dark/85 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-white backdrop-blur-md shadow-md">
-                    {photoTab === 'bni' ? (
-                      <>
-                        <span className="inline-block h-2 w-2 rounded-full bg-[#E01A22]" />
-                        BNI Induction Ceremony
-                      </>
-                    ) : (
-                      <>
-                        <ShieldCheckIcon className="h-3.5 w-3.5 text-accent" />
-                        Verified Leadership
-                      </>
-                    )}
-                  </div>
-                </div>
-
-                {/* Caption / Designation bar */}
-                <figcaption className="mt-3 flex items-center justify-between px-1">
-                  <div>
-                    <h3 className="font-heading text-sm font-extrabold uppercase tracking-display text-primary">
-                      {about.owner?.name ?? 'Akash Shubhangi Birudev Gadade'}
-                    </h3>
-                    <p className="text-[0.7rem] font-bold uppercase tracking-wider text-accent">
-                      {photoTab === 'bni' ? 'BNI Member · Induction Ceremony' : (about.owner?.designation ?? 'Founder & Managing Director')}
-                    </p>
-                  </div>
-                  <span className="rounded bg-primary/5 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-primary/70">
-                    Est. 2020
-                  </span>
-                </figcaption>
-              </figure>
+              <LeadershipCarousel />
             </Reveal>
           </div>
         </div>
