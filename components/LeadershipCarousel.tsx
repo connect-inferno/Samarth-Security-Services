@@ -240,21 +240,22 @@ export default function LeadershipCarousel() {
         </button>
       </div>
 
-      {/* Caption */}
+      {/* Caption
+          The tag pill sits ABOVE the name rather than beside it — some names
+          here run long ("Birudev Janappa Gadade & Shubhangi Birudev Gadade"),
+          and a side-by-side layout squeezed the name into a sliver next to
+          the pill and truncated it. Stacking gives the name the full card
+          width to wrap onto two lines instead. */}
       <figcaption className="mt-3.5 px-1">
-        <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0 flex-1">
-            <h3 className="truncate font-heading text-sm font-extrabold uppercase tracking-display leading-snug text-primary">
-              {active.name}
-            </h3>
-            <p className="mt-0.5 text-[0.72rem] font-bold uppercase tracking-wider text-accent">
-              {active.role}
-            </p>
-          </div>
-          <span className="shrink-0 rounded border border-primary/10 bg-primary/5 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-primary/80">
-            {active.tag}
-          </span>
-        </div>
+        <span className="inline-block rounded border border-primary/10 bg-primary/5 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-primary/80">
+          {active.tag}
+        </span>
+        <h3 className="mt-2 font-heading text-sm font-extrabold uppercase tracking-display leading-snug text-primary">
+          {active.name}
+        </h3>
+        <p className="mt-0.5 text-[0.72rem] font-bold uppercase tracking-wider text-accent">
+          {active.role}
+        </p>
 
         <div className="mt-3 flex items-center justify-between border-t border-primary/10 pt-2.5">
           <div className="flex items-center gap-1.5">
