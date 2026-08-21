@@ -1,21 +1,46 @@
 # Image assets
 
-Drop your real files here, then swap the placeholders in the components (each
-`ImagePlaceholder` and `Logo` has a comment showing the exact `next/image` code).
+Most of this folder is now real content (logo, owner/founder photos, certificate
+scans, service photos) rather than placeholders.
 
-Recommended files & sizes:
+## Open Graph / social share images
 
-| File                                   | Used by                | Suggested size      |
-| -------------------------------------- | ---------------------- | ------------------- |
-| `logo.png` (or `.svg`)                 | `components/Logo.tsx`  | square, ~256×256    |
-| `og-image.jpg`                         | social share preview   | **1200 × 630**      |
-| `services/security.jpg`                | Services card          | 16:10, ~1000px wide |
-| `services/housekeeping.jpg`            | Services card          | 16:10               |
-| `services/labour.jpg`                  | Services card          | 16:10               |
-| `services/support.jpg`                 | Services card          | 16:10               |
-| `services/manpower.jpg`                | Services card          | 16:10               |
-| `certificates/psara.jpg` … `shop-act`  | Compliance lightbox    | 4:3, high-res scan  |
-| `maharashtra-map.png`                  | Branches map graphic   | 4:5 portrait        |
+`og-image.png` (home + every page that doesn't override it) and
+`og-image-clients.png` (`/clients` only) are **generated, not hand-designed** —
+composed from an SVG template embedding the real logo, then rasterized to PNG
+with `sharp`. They're checked in as static files rather than generated at
+request/build time via `next/og`'s `ImageResponse`, because that approach hit a
+`TypeError: Invalid URL` bug in `next/dist/compiled/@vercel/og` on this
+project's Windows dev machine during `next build` — regardless of the `runtime`
+export, since Next's static prerendering always goes through the Node-compiled
+path at build time. Shipping real static files sidesteps that entirely and
+works identically regardless of the build platform.
 
-Keep alt text intact when swapping — it's already written for SEO.
-Optimize/compress images before adding them (e.g. Squoosh) for fast Core Web Vitals.
+**To regenerate them** (e.g. after a stat changes in `data/clients.ts`, or the
+logo is replaced): the generation script isn't checked into the repo since it's
+a one-off tool, not app code. Recreate it as a Node script that:
+
+1. Reads `public/images/samarth_logo.jpg`, base64-encodes it.
+2. Builds a 1200×630 SVG string (navy gradient background `#002451→#00183A`,
+   accent `#C8202F`, the embedded logo via `<image>`, `Arial, sans-serif`
+   bold/uppercase text — a system font, not a custom one, so it renders
+   identically everywhere without a font-loading dependency).
+3. Rasterizes with `sharp(Buffer.from(svg)).png().toFile(...)`.
+
+`npm install --no-save sharp` first if it isn't already available locally —
+it's not a project dependency, just a one-off tool for this task.
+
+## Everything else
+
+| File                                    | Used by                |
+| ---------------------------------------- | ----------------------- |
+| `samarth_logo.jpg`                       | `components/Logo.tsx`, header/footer, OG images, JSON-LD |
+| `gadage_logo.jpg`                        | favicon / apple-touch-icon (`app/layout.tsx`) |
+| `owner.png`, `parents.png`, `bni.png`    | `components/LeadershipCarousel.tsx` |
+| `psara_license.jpg`, `iso_9001.jpg`, `epf_certificate_*.jpg`, `esic_certificate_*.jpg`, `gst_certificate_*.jpg`, `msme_certificate_*.jpg` | `components/Compliance.tsx` lightbox |
+| `services/*`                             | Services cards |
+| `hero.jpg`, `hero.mp4`                   | Hero background |
+
+Keep alt text intact when swapping any of these — it's already written for SEO.
+Optimize/compress new images before adding them (e.g. Squoosh) for fast Core
+Web Vitals.

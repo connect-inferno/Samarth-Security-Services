@@ -3,7 +3,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import ClientsPage from '@/components/ClientsPage';
-import { SITE_URL, seo } from '@/data/site';
+import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd';
+import { SITE_URL } from '@/data/site';
 
 export const metadata: Metadata = {
   title: 'Our Clients | Samarth Security — Trusted by Industry Leaders in Maharashtra',
@@ -16,13 +17,25 @@ export const metadata: Metadata = {
     title: 'Our Clients | Samarth Security',
     description:
       'Organisations across Maharashtra that rely on Samarth Security for guarding, housekeeping and manpower services.',
-    images: [{ url: seo.ogImage, width: 1200, height: 630, alt: 'Samarth Security clients' }],
+    images: [
+      {
+        url: '/images/og-image-clients.png',
+        width: 1200,
+        height: 630,
+        alt: 'Samarth Security — Trusted by Industry Leaders Across Maharashtra',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/images/og-image-clients.png'],
   },
 };
 
 export default function Clients() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: 'Our Clients', path: '/clients' }]} />
       {/* Sub-pages have no full-bleed hero behind the header, so it renders solid. */}
       <Header alwaysSolid />
       <main id="main">

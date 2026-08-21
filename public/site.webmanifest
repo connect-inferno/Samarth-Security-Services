@@ -1,0 +1,16 @@
+{
+  "name": "Samarth Security — Gadade Group",
+  "short_name": "Samarth Security",
+  "description": "PSARA licensed security, housekeeping & manpower services across Maharashtra.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#00183A",
+  "theme_color": "#002451",
+  "icons": [
+    {
+      "src": "/images/gadage_logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    }
+  ]
+}

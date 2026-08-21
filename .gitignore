@@ -31,3 +31,4 @@ next-env.d.ts
 # ide & temp
 .claude/
 .next-dev-verify/
+.next-verify/

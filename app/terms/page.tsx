@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import LegalPage from '@/components/LegalPage';
+import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd';
 import { termsOfService } from '@/data/legal';
 import { SITE_URL } from '@/data/site';
 
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: 'Terms of Service', path: '/terms' }]} />
       <Header alwaysSolid />
       <main id="main">
         <LegalPage doc={termsOfService} />

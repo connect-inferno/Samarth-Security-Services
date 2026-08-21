@@ -18,13 +18,16 @@ export default function JsonLd() {
     legalName: company.legalName,
     parentOrganization: { '@type': 'Organization', name: company.parent },
     url: SITE_URL,
-    logo: `${SITE_URL}/images/logo.png`,
+    // Real logo file — this used to point at a /images/logo.png that was
+    // never actually added, so every crawler picking it up got a 404.
+    logo: `${SITE_URL}/images/samarth_logo.jpg`,
     image: `${SITE_URL}${seo.ogImage}`,
     description: seo.description,
     telephone: contact.phone,
     email: contact.email,
     foundingDate: company.foundingDate,
     founder: { '@type': 'Person', name: company.founder },
+    priceRange: '₹₹',
     sameAs,
     areaServed,
     slogan: company.tagline,
@@ -36,6 +39,16 @@ export default function JsonLd() {
       postalCode: branches[0].postalCode,
       addressCountry: 'IN',
     },
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: contact.phone,
+        email: contact.email,
+        contactType: 'customer service',
+        areaServed: 'IN',
+        availableLanguage: ['English', 'Hindi', 'Marathi'],
+      },
+    ],
   };
 
   // One LocalBusiness per branch.

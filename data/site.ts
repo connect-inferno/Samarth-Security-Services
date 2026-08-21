@@ -18,7 +18,7 @@
 const _siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? '').trim();
 export const SITE_URL = (_siteUrl && _siteUrl !== '/')
   ? _siteUrl.replace(/\/$/, '')
-  : 'https://www.samarthsecurity.in'; // fallback — set NEXT_PUBLIC_SITE_URL in Vercel env vars
+  : 'https://samarthsecurityservices.gadadegroup.in'; // fallback — set NEXT_PUBLIC_SITE_URL in Vercel env vars
 
 export const company = {
   name: 'Samarth Security',
@@ -86,5 +86,7 @@ export const seo = {
     'Samarth Security | PSARA Licensed Security & Housekeeping Services in Maharashtra',
   description:
     'Samarth Security (Gadade Group) is a PSARA-licensed security, housekeeping & manpower agency in Maharashtra. EPF, ESIC, GST & Shop Act compliant. Trained guards & facility staff across Sangli, Mumbai, Pune, Ahilyanagar, Kolhapur, Solapur, Dharashiv & Satara.',
-  ogImage: '/images/og-image.jpg', // TODO: replace with a real 1200×630 OG image
+  // Real 1200×630 PNGs, checked into the repo (see public/images/README.md
+  // for how they were generated and how to regenerate them).
+  ogImage: '/images/og-image.png',
 };

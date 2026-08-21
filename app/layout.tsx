@@ -20,7 +20,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL || 'https://www.samarthsecurity.in'),
+  metadataBase: new URL(SITE_URL || 'https://samarthsecurityservices.gadadegroup.in'),
   title: seo.title,
   description: seo.description,
   keywords: [
@@ -36,7 +36,13 @@ export const metadata: Metadata = {
     'Samarth Security',
   ],
   alternates: { canonical: '/' },
-  authors: [{ name: company.name }],
+  authors: [{ name: company.name, url: SITE_URL }],
+  creator: company.name,
+  publisher: company.name,
+  category: 'Business',
+  applicationName: company.name,
+  // Site-wide default; /clients overrides with its own tailored image (see
+  // app/clients/page.tsx) — every other route inherits this one.
   openGraph: {
     type: 'website',
     url: SITE_URL,
@@ -69,11 +75,20 @@ export const metadata: Metadata = {
     shortcut: '/images/gadage_logo.jpg',
     apple: '/images/gadage_logo.jpg',
   },
+  manifest: '/site.webmanifest',
+  // Stops mobile browsers auto-linking arbitrary digit strings on the page
+  // (a certificate number, a postal code) as if they were phone numbers —
+  // the real phone number already has explicit tel: links in the header,
+  // hero and Contact section.
+  formatDetection: { telephone: false },
+  // [REVIEW] Add your Google Search Console / Bing Webmaster verification
+  // codes here once you've registered the property, e.g.:
+  //   verification: { google: 'abc123', other: { 'msvalidate.01': 'xyz456' } }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${manrope.variable}`} suppressHydrationWarning>
+    <html lang="en-IN" className={`${inter.variable} ${manrope.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         {/* Keyboard/screen-reader users can jump past the nav. Visible only on focus. */}
         <a
