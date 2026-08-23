@@ -81,9 +81,17 @@ export const metadata: Metadata = {
   // the real phone number already has explicit tel: links in the header,
   // hero and Contact section.
   formatDetection: { telephone: false },
-  // [REVIEW] Add your Google Search Console / Bing Webmaster verification
-  // codes here once you've registered the property, e.g.:
-  //   verification: { google: 'abc123', other: { 'msvalidate.01': 'xyz456' } }
+  // Google Search Console / Bing Webmaster verification.
+  // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION or GOOGLE_SITE_VERIFICATION in .env.local or host settings.
+  verification: {
+    google:
+      process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
+      process.env.GOOGLE_SITE_VERIFICATION ||
+      undefined,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { 'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
