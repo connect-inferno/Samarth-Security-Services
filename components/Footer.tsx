@@ -23,6 +23,19 @@ export default function Footer() {
               <p className="mt-4 text-[0.65rem] font-bold uppercase tracking-widest text-white/40">
                 {company.tagline}
               </p>
+              {/* Real, crawlable link to the parent company's own site — not
+                  just a JSON-LD reference. Deliberately not rel="nofollow":
+                  this is a genuine same-organization relationship and should
+                  pass trust/authority between the two domains. */}
+              <a
+                href={company.parentUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-white/60 transition-colors hover:text-accent"
+              >
+                Part of the {company.parent}
+                <span aria-hidden="true">↗</span>
+              </a>
               <div className="mt-7 flex items-center gap-3">
                 <a
                   href={contact.instagram}
@@ -110,7 +123,16 @@ export default function Footer() {
           <Reveal>
             <div className="flex flex-col items-center justify-between gap-4 py-6 text-center text-[0.7rem] text-white/45 lg:flex-row lg:text-left">
               <p>
-                © {year} {company.name} — {company.parent}. All rights reserved.
+                © {year} {company.name} —{' '}
+                <a
+                  href={company.parentUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-white/30 underline-offset-2 transition-colors hover:text-accent hover:decoration-accent"
+                >
+                  {company.parent}
+                </a>
+                . All rights reserved.
               </p>
 
               <nav aria-label="Legal" className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">

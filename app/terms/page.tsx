@@ -11,7 +11,8 @@ export const metadata: Metadata = {
   title: 'Terms of Service | Samarth Security',
   description:
     'The terms that govern your use of the Samarth Security website, and how enquiries and quotations work.',
-  alternates: { canonical: '/terms' },
+  // No static canonical — see the comment in app/layout.tsx. middleware.ts
+  // sets the real, per-host-correct one via an HTTP Link header.
   robots: { index: true, follow: true },
   openGraph: {
     type: 'article',

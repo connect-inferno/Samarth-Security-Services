@@ -20,10 +20,24 @@ export const SITE_URL = (_siteUrl && _siteUrl !== '/')
   ? _siteUrl.replace(/\/$/, '')
   : 'https://samarthsecurityservices.gadadegroup.in'; // fallback — set NEXT_PUBLIC_SITE_URL in Vercel env vars
 
+/**
+ * The Gadade Group's own corporate site. Samarth Security is one of its
+ * divisions (this site lives on a subdomain of it: samarthsecurityservices.gadadegroup.in).
+ *
+ * Used to link the two sites together — a real footer link for genuine
+ * PageRank/trust flow, plus the JSON-LD `parentOrganization`/`sameAs` fields
+ * so search engines understand the relationship structurally, not just
+ * visually. See README → "SEO across the two Gadade Group domains" for the
+ * full picture, including the steps only doable outside this repo (Search
+ * Console, a reciprocal link from gadadegroup.in's own site).
+ */
+export const PARENT_SITE_URL = 'https://www.gadadegroup.in';
+
 export const company = {
   name: 'Samarth Security',
   legalName: 'Samarth Security (Gadade Group)',
   parent: 'Gadade Group',
+  parentUrl: PARENT_SITE_URL,
   founder: 'Akash Shubhangi Birudev Gadade',
   established: '14 June 2020',
   foundingDate: '2020-06-14',

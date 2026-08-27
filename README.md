@@ -205,6 +205,87 @@ Note: static export disables the Next.js image optimizer, so pre-compress your i
 
 ---
 
+## SEO across the two Gadade Group domains
+
+This site is deployed once and reachable at **two** domains:
+
+- `samarthsecurityservices.gadadegroup.in` — set as `SITE_URL` in `data/site.ts`.
+- `www.gadadegroup.in` — set as `PARENT_SITE_URL` in `data/site.ts`.
+
+Both serve the exact same build, and both are meant to be independently
+indexable by Google — a deliberate choice (see the conversation history / commit
+messages around `middleware.ts` if you want the full reasoning), not the
+default outcome you'd get from just pointing two domains at one deployment.
+
+### The problem this solves
+
+A Next.js `export const metadata` object is resolved once, **at build time**
+— it has no idea which domain actually served a given request. Before
+`middleware.ts` existed, every page's `<link rel="canonical">` always pointed
+at `SITE_URL`, no matter which domain you were actually on. That meant
+`gadadegroup.in` was permanently telling Google "the real version of this
+page lives on the other domain, don't index this one" — which is exactly why
+it wasn't showing up in search.
+
+### The fix: a per-host canonical via middleware, not a static tag
+
+`middleware.ts` runs on every request — even for these fully static pages —
+and sets an HTTP `Link: <url>; rel="canonical"` header with the URL of
+*whichever domain actually served the request*. This is a real,
+Google-documented alternative to the HTML `<link>` tag. No page sets a static
+HTML canonical anymore (search for `alternates:` in `app/*/page.tsx` — you
+won't find one), so there's exactly one canonical signal, and it's always
+correct for the domain that served it. Verified: `curl -I -H "Host: ..."`
+against each domain returns the right `Link` header for `/`, `/clients`,
+`/privacy-policy` and `/terms`.
+
+### Known limitation: some signals still hardcode one domain
+
+Fully solving this for *every* signal would mean making JSON-LD, Open Graph
+`url`, `sitemap.xml`, and `robots.txt` all host-aware too — a bigger change
+(the sitemap/robots content itself, not just headers, would need to vary per
+domain, which means intercepting and rewriting response *bodies* in
+middleware, not just adding a header). That wasn't done, so on
+`www.gadadegroup.in` you'll still see:
+
+- JSON-LD's `url`/`@id` fields naming the Samarth subdomain.
+- `og:url` pointing at the Samarth subdomain.
+- `/sitemap.xml` and `/robots.txt`'s `Sitemap:`/`Host:` lines pointing at the
+  Samarth subdomain (harmless — Google doesn't treat `Host:` in robots.txt as
+  meaningful today, and each domain still serves its *own* `/sitemap.xml` and
+  `/robots.txt` correctly, they just both list the Samarth URLs inside).
+
+None of these are as strong a signal as the canonical tag, which is why
+fixing *only* the canonical was enough to unblock indexing. If you want full
+per-host correctness everywhere, that's a real follow-up project, not a
+five-minute fix — ask for it explicitly if it matters to you.
+
+### What you still need to do manually (outside this repo)
+
+1. **Add `www.gadadegroup.in` as its own property in Google Search Console.**
+   It's a different hostname, so GSC treats it as a separate property from
+   the subdomain — submitting a sitemap or requesting indexing on one does
+   nothing for the other. Either add it as a second URL-prefix property, or
+   (better) verify `gadadegroup.in` as a **Domain property**, which
+   automatically covers `www`/non-`www`, `http`/`https`, and every subdomain
+   — including the Samarth one — under one unified view. Domain properties
+   require DNS TXT record verification (not HTML file/meta-tag), so you'll
+   need access to whoever manages `gadadegroup.in`'s DNS.
+2. **Submit `https://www.gadadegroup.in/sitemap.xml`** in that property once
+   it's verified, and use URL Inspection → Request Indexing on its homepage,
+   same as was done for the subdomain.
+3. **Set reasonable expectations.** Google's own guidance is that identical
+   content on two domains isn't really "two pages" to its ranking algorithm
+   — it will generally still pick one as primary for a given search query,
+   even though both are indexed and both *can* appear. That's fine for your
+   stated goal (both findable, both not suppressed) but don't expect both to
+   rank equally for the same competitive terms. If you ever want them to
+   rank independently and strongly, they'd need genuinely different content
+   — see the "keep them as two distinct sites" alternative that was
+   considered and set aside in favor of this simpler, faster fix.
+
+---
+
 © Samarth Security — Gadade Group.
 
 

@@ -11,7 +11,8 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | Samarth Security',
   description:
     'How Samarth Security collects, uses and protects the personal information you share through this website.',
-  alternates: { canonical: '/privacy-policy' },
+  // No static canonical — see the comment in app/layout.tsx. middleware.ts
+  // sets the real, per-host-correct one via an HTTP Link header.
   robots: { index: true, follow: true },
   openGraph: {
     type: 'article',

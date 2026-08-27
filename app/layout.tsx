@@ -35,7 +35,14 @@ export const metadata: Metadata = {
     'Gadade Group',
     'Samarth Security',
   ],
-  alternates: { canonical: '/' },
+  // No canonical set here deliberately. This site is served statically on
+  // TWO domains (samarthsecurityservices.gadadegroup.in and
+  // www.gadadegroup.in — same deployment, same content, both meant to be
+  // independently indexed). A static canonical baked in at build time would
+  // always point at one domain regardless of which one actually served the
+  // page — which is exactly what was suppressing gadadegroup.in from search
+  // before. The real, per-host-correct canonical is set at request time
+  // instead, via an HTTP Link header in middleware.ts.
   authors: [{ name: company.name, url: SITE_URL }],
   creator: company.name,
   publisher: company.name,

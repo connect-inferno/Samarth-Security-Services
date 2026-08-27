@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   title: 'Our Clients | Samarth Security — Trusted by Industry Leaders in Maharashtra',
   description:
     'Corporate offices, factories, housing societies, malls, hospitals and campuses across Sangli, Mumbai, Pune, Kolhapur, Solapur, Satara, Ahilyanagar and Dharashiv trust Samarth Security for PSARA-licensed guarding, housekeeping and manpower.',
-  alternates: { canonical: '/clients' },
+  // No static canonical — see the comment in app/layout.tsx. middleware.ts
+  // sets the real, per-host-correct one via an HTTP Link header.
   openGraph: {
     type: 'website',
     url: `${SITE_URL}/clients`,

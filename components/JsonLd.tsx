@@ -16,7 +16,15 @@ export default function JsonLd() {
     '@id': `${SITE_URL}/#organization`,
     name: company.name,
     legalName: company.legalName,
-    parentOrganization: { '@type': 'Organization', name: company.parent },
+    // Links this entity to the Gadade Group's own site structurally, not
+    // just visually — this is the correct schema.org field for a genuine
+    // parent-subsidiary relationship (sameAs is for other profiles of THIS
+    // SAME entity — a Facebook page, Wikipedia — not a different, related one).
+    parentOrganization: {
+      '@type': 'Organization',
+      name: company.parent,
+      url: company.parentUrl,
+    },
     url: SITE_URL,
     // Real logo file — this used to point at a /images/logo.png that was
     // never actually added, so every crawler picking it up got a 404.

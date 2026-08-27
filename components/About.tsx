@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import Reveal from './Reveal';
 import LeadershipCarousel from './LeadershipCarousel';
 import { about } from '@/data/content';
+import { company } from '@/data/site';
 
 export default function About() {
   const [activeCardIdx, setActiveCardIdx] = useState(0);
@@ -48,6 +49,19 @@ export default function About() {
 
             <Reveal delay={0.1}>
               <p className="lede mt-6">{about.body}</p>
+              {/* Real, contextual outbound link — sits right where the copy
+                  already talks about the parent company, which matters more
+                  for topical/entity SEO than the same link buried in the
+                  footer. Not rel="nofollow": genuine same-organization link. */}
+              <a
+                href={company.parentUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-secondary"
+              >
+                Learn more about the {company.parent}
+                <span aria-hidden="true">↗</span>
+              </a>
             </Reveal>
 
             {/* Leadership quote / message */}
