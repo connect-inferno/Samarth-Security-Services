@@ -48,8 +48,6 @@ export const metadata: Metadata = {
   publisher: company.name,
   category: 'Business',
   applicationName: company.name,
-  // Site-wide default; /clients overrides with its own tailored image (see
-  // app/clients/page.tsx) — every other route inherits this one.
   openGraph: {
     type: 'website',
     url: SITE_URL,

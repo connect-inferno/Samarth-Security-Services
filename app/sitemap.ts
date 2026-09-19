@@ -12,12 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
-    {
-      url: `${SITE_URL}/clients`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
     // Legal pages are low priority but should still be indexed.
     ...legalDocs.map((d) => ({
       url: `${SITE_URL}/${d.slug}`,

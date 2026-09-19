@@ -123,7 +123,7 @@ export const termsOfService: LegalDoc = {
     {
       heading: 'Intellectual property',
       body: [
-        'The content, layout and branding of this site belong to us or our licensors and may not be copied or reused without permission. Client names and logos shown on the Clients page remain the property of their respective owners and are displayed with permission.',
+        'The content, layout and branding of this site belong to us or our licensors and may not be copied or reused without permission. Client names and logos shown on our website remain the property of their respective owners and are displayed with permission.',
       ],
     },
     {

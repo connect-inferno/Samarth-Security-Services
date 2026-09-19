@@ -149,8 +149,8 @@ export default function Testimonials() {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <Link href="/clients" className="btn-outline text-xs">
-                View All Clients →
+              <Link href="/#clients" className="btn-outline text-xs">
+                View Our Clients →
               </Link>
               <a
                 href={whatsappQuote}

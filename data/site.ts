@@ -78,7 +78,7 @@ export const mailHref = `mailto:${contact.email}`;
 export const navLinks = [
   { label: 'Services', href: '/#services' },
   { label: 'About', href: '/#about' },
-  { label: 'Clients', href: '/clients' },
+  { label: 'Clients', href: '/#clients' },
   { label: 'Contact', href: '/#contact' },
 ];
 
@@ -90,7 +90,7 @@ export const footerNavLinks = [
   { label: 'About Us', href: '/#about' },
   { label: 'Compliance & PSARA', href: '/#compliance' },
   { label: 'Client Reviews', href: '/#testimonials' },
-  { label: 'Our Clients', href: '/clients' },
+  { label: 'Our Clients', href: '/#clients' },
   { label: 'Branches', href: '/#branches' },
   { label: 'Contact Us', href: '/#contact' },
 ];
