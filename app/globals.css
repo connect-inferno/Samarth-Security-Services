@@ -176,4 +176,60 @@ body {
   animation: subtle-pulse 3s ease-in-out infinite;
 }
 
+/* Marquee Scrolling Animations */
+@keyframes marquee-scroll-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-scroll-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  display: flex !important;
+  width: max-content !important;
+  will-change: transform;
+  animation: marquee-scroll-left 52s linear infinite !important;
+}
+
+.animate-marquee-right {
+  display: flex !important;
+  width: max-content !important;
+  will-change: transform;
+  animation: marquee-scroll-right 55s linear infinite !important;
+}
+
+.animate-marquee-left-slow {
+  display: flex !important;
+  width: max-content !important;
+  will-change: transform;
+  animation: marquee-scroll-left 58s linear infinite !important;
+}
+
+.animate-marquee-right-slow {
+  display: flex !important;
+  width: max-content !important;
+  will-change: transform;
+  animation: marquee-scroll-right 60s linear infinite !important;
+}
+
+/* Pause on hover when the user hovers over the track */
+.marquee-container:hover .animate-marquee-left,
+.marquee-container:hover .animate-marquee-right,
+.marquee-container:hover .animate-marquee-left-slow,
+.marquee-container:hover .animate-marquee-right-slow {
+  animation-play-state: paused !important;
+}
+
+
 

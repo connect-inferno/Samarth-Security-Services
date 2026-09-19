@@ -32,26 +32,51 @@ export const sectors = [
   'Healthcare & Education',
 ] as const;
 
-/**
- * [PLACEHOLDER DATA] — replace these with your real client names.
- * Tip: get written permission before publishing a client's name or logo.
- */
 export const clients: Client[] = [
-  { name: '[Client Name 1]', sector: 'Corporate & IT Parks', city: 'Pune', note: 'Manned guarding & housekeeping' },
-  { name: '[Client Name 2]', sector: 'Corporate & IT Parks', city: 'Mumbai', note: 'Gate & area security' },
-  { name: '[Client Name 3]', sector: 'Corporate & IT Parks', city: 'Sangli' },
-  { name: '[Client Name 4]', sector: 'Industrial & Manufacturing', city: 'Kolhapur', note: 'Round-the-clock plant security' },
-  { name: '[Client Name 5]', sector: 'Industrial & Manufacturing', city: 'Satara' },
-  { name: '[Client Name 6]', sector: 'Industrial & Manufacturing', city: 'Solapur', note: 'Skilled & unskilled manpower' },
-  { name: '[Client Name 7]', sector: 'Housing Societies', city: 'Pune', note: 'Society security & upkeep' },
-  { name: '[Client Name 8]', sector: 'Housing Societies', city: 'Mumbai' },
-  { name: '[Client Name 9]', sector: 'Retail & Hospitality', city: 'Kolhapur', note: 'Mall & multiplex security' },
-  { name: '[Client Name 10]', sector: 'Retail & Hospitality', city: 'Ahilyanagar' },
-  { name: '[Client Name 11]', sector: 'Healthcare & Education', city: 'Dharashiv', note: 'Campus security & housekeeping' },
-  { name: '[Client Name 12]', sector: 'Healthcare & Education', city: 'Sangli' },
+  { name: 'Central GST Office', sector: 'Government & Public Sector', city: 'Jaysingpur & Ichalkaranji', note: 'Statutory guarding & premises security' },
+  { name: 'Ghodawat Bungalow', sector: 'VIP Residence & Estate', city: 'Jaysingpur', note: '24/7 manned VIP guarding' },
+  { name: 'K-Gidwani Group', sector: 'Corporate & Business Group', city: 'Sangli', note: 'Corporate facility management & security' },
+  { name: 'Rajdhani Group', sector: 'Industrial & Commercial', city: 'Kupwad', note: 'Industrial area guarding & gate control' },
+  { name: 'Patwardhan Bungalow', sector: 'Heritage & Executive Estate', city: 'Miraj', note: 'Estate security & access supervision' },
+  { name: 'Varad Stone Crushers', sector: 'Industrial & Infrastructure', city: 'Boregaon', note: 'Plant security & heavy machinery protection' },
+  { name: 'Delta Laboratory', sector: 'Healthcare & Diagnostics', city: 'Sangli', note: 'Facility housekeeping & front-desk security' },
+  { name: 'Manan Construction', sector: 'Real Estate & Infrastructure', city: 'Jaysingpur', note: 'Site security & material custody' },
+  { name: 'Vyankatesh Society', sector: 'Residential Housing Society', city: 'Dhamani', note: 'Society security & maintenance staff' },
+  { name: 'Khade Sir Bungalow', sector: 'VIP Residence', city: 'Sangli', note: 'Round-the-clock residential security' },
+  { name: 'Majati Jewellers', sector: 'Retail & Luxury Showroom', city: 'Miraj', note: 'Armed security & retail loss prevention' },
 ];
 
-/** Headline numbers for the clients page. */
+/** 3 curated rows for the animated homepage strips */
+export const clientRows = {
+  row1: [
+    { name: 'Central GST Office', sector: 'Government & Public Sector', city: 'Jaysingpur & Ichalkaranji' },
+    { name: 'K-Gidwani Group', sector: 'Corporate & Business', city: 'Sangli' },
+    { name: 'Rajdhani Group', sector: 'Industrial & Commercial', city: 'Kupwad' },
+    { name: 'Manan Construction', sector: 'Real Estate & Construction', city: 'Jaysingpur' },
+    { name: 'Delta Laboratory', sector: 'Healthcare & Diagnostics', city: 'Sangli' },
+    { name: 'Majati Jewellers', sector: 'Retail & Luxury Showroom', city: 'Miraj' },
+  ],
+  row2: [
+    { name: 'Varad Stone Crushers', sector: 'Industrial & Infrastructure', city: 'Boregaon' },
+    { name: 'Ghodawat Bungalow', sector: 'VIP Residence & Estate', city: 'Jaysingpur' },
+    { name: 'Vyankatesh Society', sector: 'Residential Housing Society', city: 'Dhamani' },
+    { name: 'Patwardhan Bungalow', sector: 'Heritage & Executive Estate', city: 'Miraj' },
+    { name: 'Khade Sir Bungalow', sector: 'VIP Residence', city: 'Sangli' },
+    { name: 'Central GST Office', sector: 'Government & Public Sector', city: 'Jaysingpur & Ichalkaranji' },
+  ],
+  row3: [
+    { name: 'Ghodawat Bungalow', sector: 'VIP Residence & Estate', city: 'Jaysingpur' },
+    { name: 'Rajdhani Group', sector: 'Industrial & Commercial', city: 'Kupwad' },
+    { name: 'Majati Jewellers', sector: 'Retail & Luxury Showroom', city: 'Miraj' },
+    { name: 'Varad Stone Crushers', sector: 'Industrial & Mining', city: 'Boregaon' },
+    { name: 'Manan Construction', sector: 'Real Estate & Construction', city: 'Jaysingpur' },
+    { name: 'Vyankatesh Society', sector: 'Residential Society', city: 'Dhamani' },
+    { name: 'K-Gidwani Group', sector: 'Corporate Group', city: 'Sangli' },
+    { name: 'Patwardhan Bungalow', sector: 'Heritage Estate', city: 'Miraj' },
+  ],
+};
+
+/** Headline numbers for trust proof. */
 export const clientStats = [
   { value: '150+', label: 'Active Clients' },
   { value: '10+', label: 'Cities Served' },

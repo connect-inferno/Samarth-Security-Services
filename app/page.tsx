@@ -5,6 +5,7 @@ import About from '@/components/About';
 import Services from '@/components/Services';
 import Operations from '@/components/Operations';
 import Compliance from '@/components/Compliance';
+import Clients from '@/components/Clients';
 import Branches from '@/components/Branches';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import Testimonials from '@/components/Testimonials';
@@ -24,6 +25,7 @@ export default function Home() {
         <About />
         <Operations />
         <Compliance />
+        <Clients />
         <Branches />
         <WhyChooseUs />
         <Testimonials />
