@@ -151,6 +151,20 @@ export default function Footer() {
                 </span>
               </nav>
             </div>
+
+            <div className="border-t border-white/10 py-5 text-center text-xs text-white/70 sm:text-sm lg:text-left">
+              <p>
+                Designed &amp; Developed by{' '}
+                <a
+                  href="https://www.infernos.co.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[#E29447] transition-colors hover:text-[#F3AA60] hover:underline"
+                >
+                  Infernos IT Solutions
+                </a>
+              </p>
+            </div>
           </Reveal>
         </div>
       </div>
